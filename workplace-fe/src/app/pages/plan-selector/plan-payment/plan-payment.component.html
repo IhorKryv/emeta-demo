@@ -1,0 +1,56 @@
+<div class="plan-payment">
+  <h1>We see that you have a selected plan, but it's not paid yet</h1>
+  <h2>Please, finish the payment</h2>
+  <div class="current-plan">
+    <h2>{{myPlan.plan.name}}</h2>
+    <h1>{{myPlan.plan.price}} <span>UAH</span></h1>
+    <div class="plan-settings">
+      <span><mat-icon>check</mat-icon> {{myPlan.plan.macSettings.numberOfFreeDecks}} free deck slots</span>
+      <span><mat-icon>check</mat-icon> {{myPlan.plan.macSettings.numberOfFreeBoards}} free board slots</span>
+      <span><mat-icon>{{myPlan.plan.macSettings.allowOwnCards ? 'check' : 'close'}}</mat-icon> Own decks, cards and boards allowed</span>
+      <span><mat-icon>{{myPlan.plan.macSettings.personalPage ? 'check' : 'close'}}</mat-icon> Personal Page available</span>
+    </div>
+  </div>
+
+  <div class="plan-payment-creds">
+    <h2>We are sorry, but online-payment currently disabled. You can finish your payment using the next credentials:</h2>
+    <div class="credentials">
+      <div class="cred-left">
+        <p>
+          <label>МФО банку:</label>
+          <span>305299</span>
+        </p>
+        <p>
+          <label>Отримувач платежу:</label>
+          <span>КАНУННІКОВА ІРИНА МИКОЛАЇВНА</span>
+        </p>
+        <p>
+          <label>IBAN:</label>
+          <span>UA673052990000026009050594474</span>
+        </p>
+        <p>
+          <label>Валюта рахунку:</label>
+          <span>UAH</span>
+        </p>
+        <p>
+          <label>РНОКПП отримувача:</label>
+          <span>2626600267</span>
+        </p>
+        <p>
+          <label>Призначення платежу:</label>
+          <span>Поповнення рахунку КАНУННІКОВА ІРИНА МИКОЛАЇВНА</span>
+        </p>
+        <p>Aбо</p>
+        <p>
+          <label>Оплата карткою</label>
+          <span>4246001030307718</span>
+        </p>
+      </div>
+      <div class="cred-right">
+        <img src="assets/emeta-pay.jpg" />
+      </div>
+    </div>
+    <p>After payment is completed, you will get access to the workplace due your plan</p>
+    <span>Also, you can check for other plans <a routerLink="/plan-selector">here</a></span>
+  </div>
+</div>

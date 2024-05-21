@@ -1,0 +1,153 @@
+<div class="workplace-container">
+  <div class="workplace-section" *ngIf="workspaceDataForm">
+    <div class="workplace-header">
+      <h4 i18n="@@pages-workplace-page-client-data">Client Data</h4>
+<!--      <mat-slide-toggle class="mat-form-field-wrapper" [(ngModel)]="editData" *ngIf="editMode">-->
+<!--        Edit-->
+<!--      </mat-slide-toggle>-->
+    </div>
+    <form [formGroup]="workspaceDataForm" *ngIf="editData">
+      <mat-form-field appearance="outline">
+        <mat-label i18n="@@pages-workplace-page-first-name">First Name</mat-label>
+        <input matInput formControlName="firstName" required>
+        <mat-error *ngIf="workspaceDataForm.get('firstName')?.invalid" i18n="@@pages-workplace-page-error-first-name">Please set a first name</mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label i18n="@@pages-workplace-page-last-name">Last Name</mat-label>
+        <input matInput formControlName="lastName" required>
+        <mat-error *ngIf="workspaceDataForm.get('lastName')?.invalid" i18n="@@pages-workplace-page-error-last-name">Please set a last name</mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label i18n="@@pages-workplace-page-email">Email</mat-label>
+        <input matInput formControlName="email" required>
+        <mat-error *ngIf="workspaceDataForm.get('email')?.invalid" i18n="@@pages-workplace-page-error-email">Please set an email</mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label i18n="@@pages-workplace-page-phone">Phone</mat-label>
+        <input matInput formControlName="phone">
+      </mat-form-field>
+    </form>
+    <div class="details-section" *ngIf="!editData">
+      <div class="details-row">
+        <label class="details-label" i18n="@@pages-workplace-page-details-first-name">First Name</label>
+        <label class="details-value">{{workplace.firstName}}</label>
+      </div>
+      <div class="details-row">
+        <label class="details-label" i18n="@@pages-workplace-page-details-last-name">Last Name</label>
+        <label class="details-value">{{workplace.lastName}}</label>
+      </div>
+      <div class="details-row">
+        <label class="details-label" i18n="@@pages-workplace-page-details-email">Email</label>
+        <label class="details-value">{{workplace.email}}</label>
+      </div>
+      <div class="details-row">
+        <label class="details-label" i18n="@@pages-workplace-page-details-phone">Phone</label>
+        <label class="details-value">{{workplace.phone}}</label>
+      </div>
+    </div>
+    <div *ngIf="editMode && editData">
+      <button mat-flat-button color="primary" (click)="updateWorkplaceData()" i18n="@@pages-workplace-page-details-save">Save</button>
+    </div>
+  </div>
+  <div class="workplace-section" *ngIf="workspacePlanForm">
+    <div class="workplace-header">
+      <h4 i18n="@@pages-workplace-page-details-payment-plan">Payment Plan</h4>
+      <mat-slide-toggle class="mat-form-field-wrapper" [(ngModel)]="editPlan" *ngIf="editMode" i18n="@@pages-workplace-page-details-edit">
+        Edit
+      </mat-slide-toggle>
+    </div>
+    <form [formGroup]="workspacePlanForm" *ngIf="editPlan">
+      <autocomplete [autocompleteData]="plansAutocomplete"></autocomplete>
+    </form>
+    <ng-container *ngIf="workspacePlanForm.get('plan')!.value != null">
+      <div class="details-section">
+        <div class="details-row" *ngIf="!editPlan">
+          <label class="details-label" i18n="@@pages-workplace-page-details-plan-name">Name</label>
+          <label class="details-value">{{workplace.plan?.name}}</label>
+        </div>
+        <div class="details-row">
+          <label class="details-label" i18n="@@pages-workplace-page-details-plan-price">Price</label>
+          <label class="details-value">{{workspacePlanForm.get('plan')!.value!.price || ''}}{{workspacePlanForm.get('plan')!.value!.duration || '' | translateString}}</label>
+        </div>
+        <div *ngIf="macSettings" class="plan-limits">
+          <div class="details-row">
+            <label class="details-label" i18n="@@pages-workplace-page-details-plan-number-of-decks">Number Of Decks</label>
+            <label class="details-value">{{macSettings.numberOfFreeDecks}}</label>
+          </div>
+          <div class="details-row">
+            <label class="details-label" i18n="@@pages-workplace-page-details-plan-number-of-boards">Number Of Boards</label>
+            <label class="details-value">{{macSettings.numberOfFreeBoards}}</label>
+          </div>
+          <div class="details-row">
+            <label class="details-label" i18n="@@pages-workplace-page-details-plan-session-size">Session size</label>
+            <label class="details-value">{{macSettings.maxGroupSize}}</label>
+          </div>
+          <div class="details-row">
+            <label class="details-label" i18n="@@pages-workplace-page-details-plan-allow-page">Allow personal page</label>
+            <label class="details-value">{{macSettings.personalPage | toString}}</label>
+          </div>
+          <div class="details-row">
+            <label class="details-label" i18n="@@pages-workplace-page-details-plan-allow-decks">Allow own decks</label>
+            <label class="details-value">{{macSettings.allowOwnCards | toString}}</label>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+    <div *ngIf="editMode && editPlan">
+      <button mat-flat-button color="primary" (click)="updateWorkplacePlan()" i18n="@@pages-workplace-page-save">Save</button>
+    </div>
+  </div>
+  <div class="workplace-section">
+    <div class="workplace-header">
+      <h4 i18n="@@pages-workplace-page-client-status">Client Status</h4>
+      <mat-slide-toggle class="mat-form-field-wrapper" [(ngModel)]="editStatus" *ngIf="editMode" i18n="@@pages-workplace-page-edit">
+        Edit
+      </mat-slide-toggle>
+    </div>
+    <div class="details-section" *ngIf="workplace.id">
+      <div class="details-row">
+        <label class="details-label" i18n="@@pages-workplace-page-status">Status</label>
+        <label class="details-value">{{workplace.status}}</label>
+      </div>
+      <div class="details-row">
+        <label class="details-label" i18n="@@pages-workplace-page-paid-until">Paid until</label>
+        <label class="details-value">{{workplace.planPaidUntil | date:'short'}}</label>
+      </div>
+      <div class="details-row">
+        <label class="details-label" i18n="@@pages-workplace-page-created-date">Created date</label>
+        <label class="details-value">{{workplace.createdDate | date:'short'}}</label>
+      </div>
+      <div class="details-row">
+        <label class="details-label" i18n="@@pages-workplace-page-expired-date">Expired date</label>
+        <label class="details-value">{{workplace.expiredAt | date:'short'}}</label>
+      </div>
+    </div>
+    <div *ngIf="workspaceStatusForm && (!editMode || (editMode && editStatus))">
+      <form [formGroup]="workspaceStatusForm">
+        <mat-form-field appearance="outline">
+          <mat-label i18n="@@pages-workplace-page-client-status">Client Status</mat-label>
+          <mat-select formControlName="status" required>
+            <mat-option value="NEW">{{'NEW' | translateString}}</mat-option>
+            <mat-option value="ACTIVATED">{{'ACTIVATED' | translateString}}</mat-option>
+            <mat-option value="TEMPORARY">{{'TEMPORARY' | translateString}}</mat-option>
+            <mat-option *ngIf="editMode" value="SUSPENDED">{{'SUSPENDED' | translateString}}</mat-option>
+            <mat-option *ngIf="editMode" value="DELETED">{{'DELETED' | translateString}}</mat-option>
+          </mat-select>
+          <mat-error *ngIf="workspaceStatusForm.get('status')?.invalid" i18n="@@pages-workplace-page-error-status">Please set a status</mat-error>
+        </mat-form-field>
+      </form>
+      <div *ngIf="!editMode">
+        <button mat-flat-button color="primary" (click)="createPaymentPlan()" i18n="@@pages-workplace-page-create" [disabled]="actionStarted">Create Workplace</button>
+      </div>
+    </div>
+    <div *ngIf="editMode && editStatus">
+      <button mat-flat-button color="primary" (click)="updateWorkplaceStatus()" i18n="@@pages-workplace-page-save">Save</button>
+    </div>
+    <div *ngIf="showLoader">
+      <loader></loader>
+    </div>
+  </div>
+</div>
+<div>
+<!--  <orders></orders>-->
+</div>

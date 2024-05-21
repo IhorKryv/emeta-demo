@@ -1,0 +1,12 @@
+<div class="dashboard">
+  <instant-session></instant-session>
+  <calendar *ngIf="calendarSettings" [calendarSettings]="calendarSettings"></calendar>
+  <ng-template #cellTemplate let-data="data">
+    <div class="scroll-wrapper">
+      <div class="event-container">
+        <calendar-event *ngFor="let eventItem of data" [header]="eventItem.name" [content]="eventItem.startTime + ' ' + eventItem.endTime" [data]="eventItem" [status]="eventItem.sessionStatus" (onEventSelected)="onEventSelect($event)"></calendar-event>
+      </div>
+    </div>
+  </ng-template>
+</div>
+

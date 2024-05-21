@@ -1,0 +1,18 @@
+@use "../../../common/palett";
+
+.event-container {
+  height: 120px;
+  overflow-y: auto;
+}
+
+.scroll-wrapper {
+  ::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: palett.$additional-text-color;
+    border-radius: 4px;
+    width: 4px;
+  }
+}

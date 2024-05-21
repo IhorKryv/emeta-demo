@@ -1,0 +1,43 @@
+<h1 mat-dialog-title>
+  <ng-container *ngIf="!board.id; else editMode" i18n="@@pages-board-creation">Board Creation</ng-container>
+  <ng-template #editMode>
+    <span i18n="@@pages-board-editing">
+      Board Editing
+    </span>
+  </ng-template>
+</h1>
+<div mat-dialog-content>
+  <form [formGroup]="boardForm" class="board-dialog-content">
+    <mat-form-field appearance="outline">
+      <mat-label i18n="@@pages-board-name">Board Name</mat-label>
+      <input matInput formControlName="name" required>
+      <mat-error *ngIf="boardForm.get('name')?.invalid" i18n="@@pages-board-error-name">Please set a board name</mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label i18n="@@pages-board-description">Board Description</mat-label>
+      <textarea matInput formControlName="description"></textarea>
+    </mat-form-field>
+    <ng-container *ngIf="board.imageUrl || previewURL; else noImage">
+      <div class="image-field">
+        <img class="board-background" [src]="previewURL? previewURL : board.imageUrl" alt="Board image"/>
+        <button mat-flat-button color="primary" class="remove-image" (click)="removeImage()" i18n="@@pages-board-remove-image">Remove board image</button>
+      </div>
+    </ng-container>
+    <ng-template #noImage>
+      <span class="no-image" i18n="@@pages-board-no-image">
+        Looks like you didn't add any background image yet
+      </span>
+    </ng-template>
+    <div *ngIf="!board.imageUrl">
+      <input type="file" class="file-input"
+             (change)="onFileSelected($event)">
+    </div>
+    <div *ngIf="imageError">
+      <h3 i18n="@@pages-board-cannot-update">You can't {{this.board.id! ? 'update' : 'create'}} a board without image. Please upload the image and save again</h3>
+    </div>
+  </form>
+</div>
+<div mat-dialog-actions>
+    <button mat-stroked-button (click)="onClose()" i18n="@@pages-board-cancel">Cancel</button>
+    <button mat-flat-button color="primary" (click)="onSave()" i18n="@@pages-board-save">Save</button>
+</div>

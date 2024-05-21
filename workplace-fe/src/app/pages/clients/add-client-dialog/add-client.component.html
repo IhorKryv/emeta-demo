@@ -1,0 +1,29 @@
+<h1 mat-dialog-title>
+  <ng-container *ngIf="!client.id; else editMode" i18n="@@clients-add-create">Client Creation</ng-container>
+  <ng-template #editMode><span i18n="@@clients-add-edit">Client Editing</span></ng-template>
+</h1>
+<div mat-dialog-content>
+  <form [formGroup]="clientForm" class="client-dialog-content">
+    <mat-form-field appearance="outline">
+      <mat-label i18n="@@clients-add-firstName">First Name</mat-label>
+      <input matInput formControlName="firstName" (input)="onValuesChange()" required>
+      <mat-error *ngIf="clientForm.get('firstName')?.invalid" i18n="@@clients-add-firstNameError">Please set a client's first name</mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label i18n="@@clients-add-lastName">Last Name</mat-label>
+      <input matInput formControlName="lastName" (input)="onValuesChange()" >
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label i18n="@@clients-add-email">Email</mat-label>
+      <input matInput formControlName="email" (input)="onValuesChange()" >
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label i18n="@@clients-add-phone">Phone Number</mat-label>
+      <input matInput formControlName="phone" (input)="onValuesChange()" >
+    </mat-form-field>
+  </form>
+</div>
+<div mat-dialog-actions class="action-buttons">
+  <button mat-stroked-button (click)="onClose()" i18n="@@dialog-cancel">Cancel</button>
+  <button mat-flat-button color="primary" (click)="onSave()" [disabled]="saveDisabled" i18n="@@dialog-save">Save</button>
+</div>

@@ -1,0 +1,122 @@
+.plan-selector {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 25px;
+  justify-content: center;
+
+  h1 {
+    font-size: 42px;
+    margin-bottom: 25px;
+    padding-bottom: 25px;
+    color: #5e53f7;
+    text-align: center;
+  }
+
+  p {
+    font-size: 22px;
+    padding: 0;
+    margin: 0;
+    color: #7a7a7a;
+    text-align: center;
+  }
+
+  .available-plans {
+    padding: 50px 0;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 30px;
+    width: 100%;
+
+    .plan-card {
+      width: calc(45% - 15px);
+      max-width: 500px;
+      padding: 35px 15px;
+      border-radius: 5px;
+      border: 1px solid #e3e3e3;
+      display: flex;
+      flex-direction: column;
+      box-shadow: rgba(0, 0, 0, 0.45) 0 25px 20px -20px;
+      min-height: 475px;
+
+      .plan-card-header {
+        display: flex;
+        align-items: baseline;
+        justify-content: center;
+        gap: 5px;
+        margin-bottom: 50px;
+
+        h1 {
+          margin: 0;
+          padding: 0;
+
+          span {
+            font-size: 24px;
+            color: #424242;
+          }
+        }
+
+        span {
+          font-size: 18px;
+          color: #7a7a7a;
+        }
+      }
+
+      h2 {
+        text-align: center;
+        font-size: 28px;
+        color: #5e53f7;
+      }
+
+      .plan-settings {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+        margin-bottom: 50px;
+
+        span {
+          display: flex;
+          align-items: center;
+          justify-content: flex-start;
+          gap: 15px;
+          font-weight: bold;
+          font-size: 18px;
+          color: #424242;
+        }
+      }
+
+      button {
+        padding: 5px 0;
+      }
+    }
+  }
+}
+
+@media (max-width: 992px) {
+  .plan-selector {
+    .available-plans {
+      padding: 50px 0;
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+
+      .plan-card {
+        width: calc(100% - 50px);
+        max-width: 500px;
+        padding: 35px 15px;
+        border-radius: 5px;
+        border: 1px solid #e3e3e3;
+        display: flex;
+        flex-direction: column;
+        box-shadow: rgba(0, 0, 0, 0.45) 0 25px 20px -20px;
+        min-height: 475px;
+      }
+    }
+  }
+}

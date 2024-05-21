@@ -1,0 +1,63 @@
+.mobile-decks {
+  min-height: 100vh;
+  align-items: center;
+
+  .mobile-decks-text {
+    h1 {
+      transition: 0.3s;
+      font-size: 32px;
+      font-weight: 1000;
+      color: #424242;
+      text-align: center;
+    }
+
+    p {
+      transition: 0.3s;
+      font-size: 14px;
+      font-weight: 600;
+      color: #424242;
+      text-align: center;
+      margin-bottom: 25px;
+    }
+  }
+
+  .mobile-deck-cards {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .mobile-card {
+      flex-direction: column;
+      border-radius: 15px;
+      background: #5c51f2;
+      align-items: center;
+      padding: 15px 5px;
+      margin-bottom: 25px;
+      max-width: 500px;
+      box-shadow: rgba(0, 0, 0, 0.45) 0 25px 20px -20px;
+
+      img {
+        width: 100%;
+        max-width: 100px;
+        max-height: 100px;
+        object-fit: cover;
+        border-radius: 15px;
+        box-shadow: rgba(0, 0, 0, 0.25) 0 0.0625em 0.0625em, rgba(0, 0, 0, 0.25) 0 0.125em 0.5em, rgba(255, 255, 255, 0.1) 0 0 0 1px inset;
+      }
+      h2 {
+        color: white;
+        font-size: 26px;
+        margin-bottom: 5px;
+        padding-bottom: 0;
+      }
+
+      p {
+        text-align: center;
+        color: white;
+        font-size: 16px;
+        padding: 0;
+        margin: 0;
+      }
+    }
+  }
+}

@@ -1,0 +1,7 @@
+<nav mat-tab-nav-bar>
+  <a mat-tab-link routerLink="available" routerLinkActive="" #rlaP="routerLinkActive" [active]="rlaP.isActive" i18n="@@available-sessions">Available Sessions</a>
+<!--  <a mat-tab-link routerLink="archived" routerLinkActive="" #rlaR="routerLinkActive" [active]="rlaR.isActive" i18n="@@archived-sessions">Archived Sessions</a>-->
+</nav>
+<div>
+  <router-outlet></router-outlet>
+</div>

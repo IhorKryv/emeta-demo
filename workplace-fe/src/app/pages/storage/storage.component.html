@@ -1,0 +1,9 @@
+<nav mat-tab-nav-bar>
+  <a mat-tab-link routerLink="my-decks" routerLinkActive="" #rlaP="routerLinkActive" [active]="rlaP.isActive" i18n="@@storage-my-decks">My Decks</a>
+  <a mat-tab-link routerLink="my-boards" routerLinkActive="" #rlaR="routerLinkActive" [active]="rlaR.isActive" i18n="@@storage-my-boards">My Boards</a>
+  <a mat-tab-link routerLink="decks" routerLinkActive="" #rlaD="routerLinkActive" [active]="rlaD.isActive" i18n="@@storage-decks-from-admin">Decks</a>
+  <a mat-tab-link routerLink="boards" routerLinkActive="" #rlaB="routerLinkActive" [active]="rlaB.isActive" i18n="@@storage-boards-from-admin">Boards</a>
+</nav>
+<div>
+  <router-outlet></router-outlet>
+</div>

@@ -1,0 +1,37 @@
+<div class="banner">
+  <div class="banner-inputs">
+    <mat-form-field class="banner-input">
+      <mat-label i18n="@@profile-banner-title">Title</mat-label>
+      <input matInput [(ngModel)]="banner.title" placeholder="Banner Title" (ngModelChange)="onTitleChange()">
+    </mat-form-field>
+
+    <mat-form-field class="banner-input">
+      <mat-label i18n="@@profile-banner-info">Information</mat-label>
+      <textarea matInput [(ngModel)]="banner.info" placeholder="Banner Information" [rows]="7" maxlength="255" (ngModelChange)="onInfoChange()"></textarea>
+    </mat-form-field>
+  </div>
+  <div class="banner-images">
+    <div class="banner-main-image">
+      <h3>Banner Image:</h3>
+      <p><span>Recommendation: </span> For the best display on the page, please upload a square(1:1) image </p>
+      <ng-container *ngIf="mainImageURL">
+        <img class="card-back-image" [src]="mainImageURL"/>
+      </ng-container>
+      <ng-container >
+        <input type="file" class="file-input"
+               (change)="onMainImageSelected($event)">
+      </ng-container>
+    </div>
+    <div class="banner-background">
+      <h3>Background Image:</h3>
+      <p><span>Recommendation: </span> For the best display on the page, please upload a rectangle(2+:1) image </p>
+      <ng-container *ngIf="backgroundURL">
+        <img class="card-back-image" [src]="backgroundURL"/>
+      </ng-container>
+      <ng-container>
+        <input type="file" class="file-input"
+               (change)="onBackgroundSelected($event)">
+      </ng-container>
+    </div>
+  </div>
+</div>

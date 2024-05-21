@@ -1,0 +1,8 @@
+<nav mat-tab-nav-bar>
+  <a mat-tab-link routerLink="categories" routerLinkActive="" #rlaP="routerLinkActive" [active]="rlaP.isActive" i18n="@@pages-storage-categories">Categories</a>
+  <a mat-tab-link routerLink="decks" routerLinkActive="" #rlaR="routerLinkActive" [active]="rlaR.isActive" i18n="@@pages-storage-decks">Decks</a>
+  <a mat-tab-link routerLink="boards" routerLinkActive="" #rlaD="routerLinkActive" [active]="rlaD.isActive" i18n="@@pages-storage-boards">Boards</a>
+</nav>
+<div>
+  <router-outlet></router-outlet>
+</div>

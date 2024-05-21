@@ -1,0 +1,25 @@
+<div class="profile-contact">
+  <mat-form-field class="profile-contact-input">
+    <mat-label i18n="@@profile-contact-title">Title</mat-label>
+    <input matInput [(ngModel)]="profileContact.title" placeholder="Contact Section Title"
+           (ngModelChange)="onTitleChange()">
+  </mat-form-field>
+
+  <mat-form-field class="profile-contact-input">
+    <mat-label i18n="@@profile-contact-shortText">Short Text</mat-label>
+    <textarea matInput [(ngModel)]="profileContact.shortText" placeholder="Contact Short Text" [rows]="4"
+              maxlength="128" (ngModelChange)="onShortTextChange()"></textarea>
+  </mat-form-field>
+
+  <mat-form-field class="profile-contact-input">
+    <mat-label i18n="@@profile-contact-email">Email</mat-label>
+    <input matInput [(ngModel)]="profileContact.email" placeholder="Contact Email"
+           (ngModelChange)="onEmailChange()">
+  </mat-form-field>
+
+  <mat-form-field class="profile-contact-input">
+    <mat-label i18n="@@profile-contact-phone">Phone</mat-label>
+    <input matInput [(ngModel)]="profileContact.phone" placeholder="Contact Phone"
+           (ngModelChange)="onPhoneChange()">
+  </mat-form-field>
+</div>

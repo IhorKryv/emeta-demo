@@ -1,0 +1,98 @@
+<div>
+  <div class="content-header">
+    <div class="content-title">
+      <search-field (onUpdate)="doSearch($event)"></search-field>
+    </div>
+    <div *ngIf="!isMobile" class="content-action">
+      <button  mat-raised-button color="primary" (click)="addNewClient()" i18n="@@clients-add-new">Add New</button>
+    </div>
+    <div *ngIf="isMobile" class="add-button-mobile">
+      <button mat-fab color="primary" (click)="addNewClient()" aria-label="Add session">
+        <mat-icon>add</mat-icon>
+      </button>
+    </div>
+  </div>
+</div>
+<div>
+  <div *ngIf="!isMobile">
+    <table mat-table [dataSource]="dataSource" aria-describedby="">
+      <ng-container matColumnDef="index">
+        <th mat-header-cell *matHeaderCellDef> No.</th>
+        <td mat-cell *matCellDef="let client; let i = index"> {{i + 1}} </td>
+      </ng-container>
+
+
+      <ng-container matColumnDef="firstName">
+        <th mat-header-cell *matHeaderCellDef i18n="@@clients-table-firstName"> First Name</th>
+        <td mat-cell *matCellDef="let client"> {{client.firstName}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="lastName">
+        <th mat-header-cell *matHeaderCellDef i18n="@@clients-table-lastName"> Last Name</th>
+        <td mat-cell *matCellDef="let client"> {{client.lastName}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="email">
+        <th mat-header-cell *matHeaderCellDef i18n="@@clients-table-email"> Email</th>
+        <td mat-cell *matCellDef="let client"> {{client.email}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="phone">
+        <th mat-header-cell *matHeaderCellDef i18n="@@clients-table-phone"> Phone</th>
+        <td mat-cell *matCellDef="let client"> {{client.phone}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="records">
+        <th mat-header-cell *matHeaderCellDef i18n="@@clients-table-records"> Client's records</th>
+        <td mat-cell *matCellDef="let client">  <button class="records-button" (click)="openClientRecords(client)">Show records</button></td>
+      </ng-container>
+
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef></th>
+        <td mat-cell *matCellDef="let client">
+          <button mat-icon-button color="primary" (click)="editClient(client)">
+            <mat-icon fontIcon="edit"></mat-icon>
+          </button>
+          <button mat-icon-button color="warn" (click)="onDeleteClient(client)">
+            <mat-icon fontIcon="delete"></mat-icon>
+          </button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </div>
+  <div *ngIf="isMobile">
+    <div class="client-card-box" *ngFor="let client of dataSource">
+      <div class="client-card-body">
+        <div class="client-card-header">
+          <h1>{{client.firstName}} {{client.lastName}}</h1>
+          <mat-checkbox [(ngModel)]="client.onSession" disabled></mat-checkbox>
+        </div>
+        <div class="client-card-content">
+          <span><mat-icon>mail</mat-icon> {{client.email}}</span>
+          <span><mat-icon>phone</mat-icon> {{client.phone}}</span>
+        </div>
+        <div class="client-card-actions">
+          <button mat-icon-button class="orange-icon" (click)="editClient(client)">
+            <mat-icon fontIcon="edit"></mat-icon>
+          </button>
+          <button mat-icon-button class="red-icon" (click)="onDeleteClient(client)">
+            <mat-icon fontIcon="delete"></mat-icon>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="showLoader">
+    <loader></loader>
+  </div>
+  <mat-paginator *ngIf="pagination"
+                 [hidePageSize]="true"
+                 [length]="pagination.totalItems"
+                 [pageSize]="pagination.size"
+                 (page)="onPageChange($event)"
+                 aria-label="Select page">
+  </mat-paginator>
+</div>

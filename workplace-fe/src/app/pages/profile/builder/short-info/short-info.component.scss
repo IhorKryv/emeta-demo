@@ -1,0 +1,26 @@
+.short-info-header-inputs {
+  display: flex;
+  flex-direction: column;
+}
+
+.short-info-cards-title {
+  font-weight: 600;
+  font-size: 18px;
+  padding: 0;
+  margin: 0 0 15px;
+}
+
+.short-info-cards {
+  margin-top: 15px;
+  display: flex;
+  gap: 60px;
+
+  .short-info-card {
+    padding: 15px;
+    width: calc(33.33% - 40px);
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #f3f3f3;
+    border-radius: 5px;
+  }
+}

@@ -1,0 +1,77 @@
+<div [class]="isMobile ? 'content-header-mobile' : 'content-header'">
+  <div *ngIf="!isMobile" class="user-info">
+    <button mat-raised-button color="primary" (click)="addNewDeck()" i18n="@@storage-my-decks-add-new">Add New</button>
+  </div>
+</div>
+<div *ngIf="isMobile" class="add-button-mobile">
+  <button mat-fab color="primary" (click)="addNewDeck()" aria-label="Add deck">
+    <mat-icon>add</mat-icon>
+  </button>
+</div>
+<div>
+  <div>
+    <div *ngIf="showLoader">
+      <loader></loader>
+    </div>
+    <div *ngIf="!isMobile" class="my-decks">
+      <div class="my-deck-container" *ngFor="let deck of decks">
+        <div class="my-deck-card">
+          <mat-checkbox class="deck-available" [(ngModel)]="deck.available" (ngModelChange)="onAvailabilityChange(deck)"
+                        i18n="@@storage-my-decks-available">Available
+          </mat-checkbox>
+          <img [src]="getCardBackImage(deck)" alt="deck-cardback"/>
+          <div class="my-deck-info">
+            <h2>{{deck.customName && deck.customName.trim() !== '' ? deck.customName : deck.name}}</h2>
+            <p>{{deck.customDescription && deck.customDescription.trim() !== '' ? deck.customDescription : deck.description}}</p>
+            <div class="my-deck-footer">
+              <span><mat-icon fontIcon="collections"></mat-icon>
+                {{deck.cardsCount}}</span>
+              <button class="show-my-deck" (click)="openDeck(deck)" i18n="@@storage-my-decks-open ">
+                Open deck
+              </button>
+            </div>
+          </div>
+          <div class="deck-edit-remove">
+            <button class="edit-my-deck" mat-icon-button (click)="editDeck(deck)">
+              <mat-icon fontIcon="edit"></mat-icon>
+            </button>
+            <button class="remove-my-deck" mat-icon-button (click)="onDeckDelete(deck)">
+              <mat-icon fontIcon="delete"></mat-icon>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="isMobile" class="my-decks-mobile">
+      <div class="mobile-deck-box" *ngFor="let deck of decks">
+        <div class="mobile-deck-card">
+          <img [src]="getCardBackImage(deck)" alt="deck-cardback"/>
+          <mat-checkbox class="mobile-deck-available" [(ngModel)]="deck.available"
+                        (ngModelChange)="onAvailabilityChange(deck)" i18n="@@storage-my-decks-available">Available
+          </mat-checkbox>
+          <div class="mobile-deck-card-info">
+            <h2>{{deck.name}}</h2>
+            <p>{{deck.description}}</p>
+            <div class="mobile-deck-card-actions">
+              <div>
+                <span><mat-icon fontIcon="collections"></mat-icon>
+                  {{deck.cardsCount}}</span>
+              </div>
+              <div>
+                <button class="orange-icon" mat-icon-button (click)="editDeck(deck)">
+                  <mat-icon fontIcon="edit"></mat-icon>
+                </button>
+                <button class="green-icon" mat-icon-button (click)="openDeck(deck)">
+                  <mat-icon fontIcon="remove_red_eye"></mat-icon>
+                </button>
+                <button class="red-icon" mat-icon-button (click)="onDeckDelete(deck)">
+                  <mat-icon fontIcon="delete"></mat-icon>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

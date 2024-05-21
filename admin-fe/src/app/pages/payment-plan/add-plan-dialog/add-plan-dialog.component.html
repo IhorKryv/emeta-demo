@@ -1,0 +1,94 @@
+<h1 mat-dialog-title>
+  <ng-container *ngIf="!plan.id; else editMode" i18n="@@pages-add-plan-creation">Plan Creation</ng-container>
+  <ng-template #editMode>
+    <span i18n="@@pages-add-plan-editing">
+      Plan Editing
+    </span>
+  </ng-template>
+</h1>
+<div mat-dialog-content>
+  <form [formGroup]="planForm">
+    <mat-slide-toggle class="mat-form-field-wrapper" formControlName="enabled" i18n="@@pages-add-plan-active">
+      Active
+    </mat-slide-toggle>
+    <mat-form-field appearance="outline">
+      <mat-label i18n="@@pages-add-plan-name">Plan name</mat-label>
+      <input matInput formControlName="name" required>
+      <mat-error *ngIf="planForm.get('name')?.invalid" i18n="@@pages-add-plan-error-name">Please set a plan name</mat-error>
+    </mat-form-field>
+
+    <div class="fields-container">
+      <div class="left-field">
+        <mat-form-field appearance="outline">
+          <mat-label i18n="@@pages-add-plan-price">Plan price</mat-label>
+          <input matInput formControlName="price" required>
+          <mat-error *ngIf="planForm.get('price')?.invalid" i18n="@@pages-add-plan-error-price">Please set a plan price</mat-error>
+        </mat-form-field>
+      </div>
+      <div class="right-field">
+        <mat-form-field appearance="outline">
+          <mat-label i18n="@@pages-add-plan-duration">Plan duration</mat-label>
+          <mat-select formControlName="duration" required>
+            <mat-option value="DAY">{{'DAY' | translateString}}</mat-option>
+            <mat-option value="WEEK">{{'WEEK' | translateString}}</mat-option>
+            <mat-option value="MONTH">{{'MONTH' | translateString}}</mat-option>
+            <mat-option value="THREE_MONTHS">{{'THREE_MONTHS' | translateString}}</mat-option>
+            <mat-option value="SIX_MONTHS">{{'SIX_MONTHS' | translateString}}</mat-option>
+            <mat-option value="YEAR">{{'YEAR' | translateString}}</mat-option>
+          </mat-select>
+          <mat-error *ngIf="planForm.get('duration')?.invalid" i18n="@@pages-add-plan-error-duration">Please set a duration</mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div class="fields-container">
+      <div class="left-field">
+        <mat-form-field appearance="outline">
+          <mat-label i18n="@@pages-add-plan-decks">Number of available decks</mat-label>
+          <input type="number" matInput formControlName="numberOfDecks" required>
+          <mat-error *ngIf="planForm.get('numberOfDecks')?.invalid" i18n="@@pages-add-plan-error-decks">Please set a number of decks</mat-error>
+        </mat-form-field>
+      </div>
+      <div class="right-field">
+        <mat-form-field appearance="outline">
+          <mat-label i18n="@@pages-add-plan-boards">Number of available boards</mat-label>
+          <input type="number" matInput formControlName="numberOfBoards" required>
+          <mat-error *ngIf="planForm.get('numberOfBoards')?.invalid" i18n="@@pages-add-plan-error-boards">Please set a number of boards</mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+      <mat-form-field appearance="outline">
+        <mat-label i18n="@@pages-add-plan-session">Max session size</mat-label>
+        <input type="number" matInput formControlName="groupSize" required>
+        <mat-error *ngIf="planForm.get('groupSize')?.invalid" i18n="@@pages-add-plan-error-session">Please set a session size</mat-error>
+      </mat-form-field>
+
+    <div class="mat-form-field-wrapper fields-container">
+      <div class="left-field">
+        <mat-checkbox formControlName="personalPage" i18n="@@pages-add-plan-personal-page">Allow personal page</mat-checkbox>
+      </div>
+      <div class="right-field">
+        <mat-checkbox formControlName="ownCards" i18n="@@pages-add-plan-personal-cards">Allow own cards</mat-checkbox>
+      </div>
+    </div>
+
+
+    <mat-form-field appearance="outline">
+      <mat-label i18n="@@pages-add-plan-features">Features</mat-label>
+      <mat-select formControlName="preferences" multiple>
+        <mat-option *ngFor="let preference of preferenceList" [value]="preference.id">{{preference.name}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label i18n="@@pages-add-plan-description">Plan description</mat-label>
+      <textarea matInput formControlName="description" cdkTextareaAutosize cdkAutosizeMinRows="3"></textarea>
+      <mat-error *ngIf="planForm.get('description')?.invalid" i18n="@@pages-add-plan-error-description">Please set a plan description</mat-error>
+    </mat-form-field>
+  </form>
+</div>
+
+<div mat-dialog-actions class="action-buttons">
+  <button mat-stroked-button (click)="onClose()" i18n="@@pages-add-plan-cancel">Cancel</button>
+  <button mat-flat-button color="primary" (click)="onSave()" i18n="@@pages-add-plan-save">Save</button>
+</div>

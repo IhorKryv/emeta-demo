@@ -1,0 +1,69 @@
+<div class="settings-body">
+  <div class="settings-personal">
+    <h1>Personal Information</h1>
+    <form *ngIf="profileForm" [formGroup]="profileForm">
+      <mat-form-field appearance="outline">
+        <mat-label i18n="@@profile-add-firstName">First Name</mat-label>
+        <input matInput formControlName="firstname" (input)="onValuesChange()" required>
+        <mat-error *ngIf="profileForm.get('firstname')?.invalid" i18n="@@profile-add-firstNameError">Please set Your
+          first name
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label i18n="@@profile-add-lastName">Last Name</mat-label>
+        <input matInput formControlName="lastname" (input)="onValuesChange()" required>
+        <mat-error *ngIf="profileForm.get('lastname')?.invalid" i18n="@@profile-add-lastNameError">Please set Your last
+          name
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label i18n="@@profile-add-phone">Phone Number</mat-label>
+        <input matInput formControlName="phone" (input)="onValuesChange()">
+      </mat-form-field>
+      <button mat-raised-button color="primary" (click)="updateProfile()" [disabled]="updateDisable">Update Profile
+      </button>
+    </form>
+  </div>
+  <div class="settings-password">
+    <h1>Password Reset</h1>
+    <form *ngIf="passwordForm" [formGroup]="passwordForm">
+      <mat-form-field appearance="outline">
+        <mat-label i18n="@@profile-add-oldPassword">Your Old Password</mat-label>
+        <input type="password" matInput formControlName="oldPassword" required>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label i18n="@@profile-add-newPassword">Your New Password</mat-label>
+        <input type="password" matInput formControlName="newPassword" required>
+        <mat-error *ngIf="passwordForm.get('newPassword')?.invalid" i18n="@@profile-add-newPasswordError">Please set a password that contains at least 8 symbols</mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label i18n="@@profile-add-confirmPassword">Confirm Your New Password</mat-label>
+        <input type="password" matInput formControlName="confirmPassword" required>
+        <mat-error *ngIf="passwordForm.get('newPassword')?.invalid" i18n="@@profile-add-confirmEmptyPasswordError">Please confirm your new password</mat-error>
+      </mat-form-field>
+      <button mat-raised-button color="primary" (click)="updatePassword()">Update Password</button>
+      <div class="error-field" *ngIf="passwordsNotMatch || oldPasswordIsWrong || somethingWentWrong">
+        <span *ngIf="passwordsNotMatch" i18n="@@profile-add-confirmPasswordError">Confirm password not match</span>
+        <span *ngIf="oldPasswordIsWrong" i18n="@@profile-add-oldPasswordError">Your old password is wrong! Please check the value and try again</span>
+        <span *ngIf="somethingWentWrong" i18n="@@profile-add-somethingWrongError">Password reset failed. Please try again later</span>
+      </div>
+    </form>
+  </div>
+</div>
+<div class="settings-body">
+  <div class="settings-plan">
+    <h1>Current Payment Plan</h1>
+    <div class="current-plan">
+      <h2>{{myPlan.plan.name}}</h2>
+      <div class="current-plan-preferences">
+        <span><mat-icon>check</mat-icon> {{myPlan.plan.macSettings.numberOfFreeDecks}} free deck slots</span>
+        <span><mat-icon>check</mat-icon> {{myPlan.plan.macSettings.numberOfFreeBoards}} free board slots</span>
+        <span><mat-icon>{{myPlan.plan.macSettings.allowOwnCards ? 'check' : 'close'}}</mat-icon> Own decks, cards and boards allowed</span>
+        <span><mat-icon>{{myPlan.plan.macSettings.personalPage ? 'check' : 'close'}}</mat-icon> Personal Page available</span>
+      </div>
+      <h3>Payed until: <span>{{myPlan.expiringAt | date: 'medium'}}</span></h3>
+    </div>
+    <button mat-raised-button color="primary" (click)="selectPlanRedirect()">See more payment plans
+    </button>
+  </div>
+</div>

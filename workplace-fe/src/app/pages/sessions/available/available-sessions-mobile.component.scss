@@ -1,0 +1,91 @@
+.add-button-mobile {
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+}
+
+.session-card-box {
+  margin-bottom: 25px;
+
+  .session-card {
+    box-shadow: 0px 0px 3px 1px #00000047;
+    border-radius: 5px;
+
+    .session-card-status {
+      display: flex;
+      justify-content: space-between;
+      height: 40px;
+      align-items: center;
+      padding: 5px;
+
+      p {
+        font-size: 14px;
+        color: #7a7a7a;
+        display: flex;
+        align-items: center;
+
+        mat-icon {
+          margin-right: 2px;
+        }
+      }
+
+      span {
+        background: #7166f9;
+        padding: 5px;
+        border-radius: 15px;
+        color: white;
+      }
+    }
+
+    .session-card-header {
+      padding: 5px;
+
+      h2 {
+        margin: 0;
+        padding: 0;
+        font-size: 22px;
+      }
+    }
+
+    .session-content {
+      padding: 5px;
+
+      .session-info {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+
+        span {
+          display: flex;
+          align-items: center;
+          margin-bottom: 5px;
+
+          mat-icon {
+            margin-right: 5px;
+            color: #7166f9;
+          }
+        }
+      }
+    }
+
+    .session-actions {
+      background: #e0e0e0;
+      border-bottom-left-radius: 5px;
+      border-bottom-right-radius: 5px;
+      padding: 5px;
+      display: flex;
+      justify-content: center;
+
+      button {
+        border: 1px solid #9c94fb;
+        border-radius: 5px;
+        margin-right: 5px;
+      }
+    }
+  }
+}
+
+.mobile-pagination {
+  float: left;
+  margin-bottom: 10px;
+}

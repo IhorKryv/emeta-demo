@@ -1,0 +1,39 @@
+.profile-deck-header {
+  display: flex;
+  flex-direction: column;
+}
+
+.profile-deck-items {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  align-items: flex-start;
+
+  .profile-deck-item {
+    width: 100%;
+    max-width: 245px;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 25px;
+
+    .profile-deck-content {
+      padding: 10px;
+      border-radius: 5px;
+      border: 1px solid #f3f3f3;
+
+      img {
+        width: 100%;
+        object-fit: cover;
+        height: 200px;
+      }
+    }
+  }
+}
+
+.profile-deck-item-input {
+  width: 100%;
+}
+
+.file-input {
+  margin-bottom: 5px;
+}

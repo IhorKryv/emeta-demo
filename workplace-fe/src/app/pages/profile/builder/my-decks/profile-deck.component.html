@@ -1,0 +1,39 @@
+<div class="profile-deck">
+  <div class="profile-deck-header">
+    <mat-form-field class="profile-deck-input">
+      <mat-label i18n="@@profile-profile-deck-title">Title</mat-label>
+      <input matInput [(ngModel)]="profileDeck!.title!" placeholder="Deck Section Title"
+             (ngModelChange)="onTitleChange()">
+    </mat-form-field>
+
+    <mat-form-field class="profile-deck-input">
+      <mat-label i18n="@@profile-profile-deck-info">Information</mat-label>
+      <textarea matInput [(ngModel)]="profileDeck!.info!" placeholder="Deck Section Information" [rows]="7"
+                maxlength="255" (ngModelChange)="onInfoChange()"></textarea>
+    </mat-form-field>
+  </div>
+  <div class="profile-deck-items">
+    <div *ngFor="let deck of profileDeck!.decks" class="profile-deck-item">
+      <div class="profile-deck-content">
+        <ng-container *ngIf="deck.image">
+          <img class="deck-image" [src]="deck.image" alt="deck-image-{{deck.id}}"/>
+        </ng-container>
+        <ng-container>
+          <input type="file" class="file-input"
+                 (change)="onMainImageSelected($event, deck)">
+        </ng-container>
+        <mat-form-field class="profile-deck-item-input">
+          <mat-label i18n="@@profile-profile-deck-item-title">Title</mat-label>
+          <input matInput [(ngModel)]="deck.title!" placeholder="Item Title" (ngModelChange)="onDeckTitleChange(deck.id!, deck.title!)">
+        </mat-form-field>
+
+        <mat-form-field class="profile-deck-item-input">
+          <mat-label i18n="@@profile-profile-deck-item-info">Information</mat-label>
+          <textarea matInput [(ngModel)]="deck.info!" placeholder="Item Information" [rows]="11" maxlength="128"
+                    (ngModelChange)="onDeckInfoChange(deck.id!, deck.info!)"></textarea>
+        </mat-form-field>
+      </div>
+    </div>
+    <button mat-flat-button color="primary" *ngIf="profileDeck.decks.length < 5" (click)="addDeckItem()">Add deck</button>
+  </div>
+</div>

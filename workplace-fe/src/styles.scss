@@ -1,0 +1,26 @@
+@use "common/eMetaTheme";
+@use "common/palett";
+
+.mobile-title {
+  text-align: center;
+}
+
+.default-icon {
+  color: palett.$primary-color;
+}
+
+.white-icon {
+  color: white;
+}
+
+.green-icon {
+  color: #26c226;
+}
+
+.orange-icon {
+  color: orange;
+}
+
+.red-icon {
+  color: red;
+}

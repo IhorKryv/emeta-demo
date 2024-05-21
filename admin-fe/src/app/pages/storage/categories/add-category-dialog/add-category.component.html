@@ -1,0 +1,31 @@
+<h1 mat-dialog-title>
+  <ng-container *ngIf="!category.id; else editMode" i18n="@@pages-category-creation">Category Creation</ng-container>
+  <ng-template #editMode>
+    <span i18n="@@pages-category-editing">
+      Category Editing
+    </span>
+  </ng-template>
+</h1>
+<div mat-dialog-content>
+  <form [formGroup]="categoryForm" class="category-dialog-content">
+    <mat-form-field appearance="outline">
+      <mat-label i18n="@@pages-category-name">Category Name</mat-label>
+      <input matInput formControlName="name" required>
+      <mat-error *ngIf="categoryForm.get('name')?.invalid" i18n="@@pages-category-error-name">Please set a category name</mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label i18n="@@pages-category-identifier">Category Identifier</mat-label>
+      <input matInput formControlName="identifier" required>
+      <mat-error *ngIf="categoryForm.get('identifier')?.invalid" i18n="@@pages-category-error-identifier">Please set a category identifier</mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label i18n="@@pages-category-description">Category Description</mat-label>
+      <textarea matInput formControlName="description" required></textarea>
+      <mat-error *ngIf="categoryForm.get('description')?.invalid" i18n="@@pages-category-error-description">Please set a category description</mat-error>
+    </mat-form-field>
+  </form>
+</div>
+<div mat-dialog-actions>
+  <button mat-stroked-button (click)="onClose()" i18n="@@pages-category-cancel">Cancel</button>
+  <button mat-flat-button color="primary" (click)="onSave()" i18n="@@pages-category-save">Save</button>
+</div>

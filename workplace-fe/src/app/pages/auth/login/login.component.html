@@ -1,0 +1,56 @@
+<section class="login-page">
+  <div class="login-container">
+    <div class="login-content">
+      <div class="logo">
+        <img alt="emetaplus-logo" class="login-logo" src="../../../assets/logo.png"/>
+      </div>
+      <h1 class="title" i18n="@@login-title">Login now</h1>
+      <div>
+        <form class="content" [formGroup]="authForm" novalidate (ngSubmit)="submitForm()">
+          <mat-form-field>
+            <mat-icon matPrefix>person_outline</mat-icon>
+            <input type="text" matInput placeholder="Username" formControlName="userName">
+            <mat-error *ngIf="authForm.get('userName')?.invalid" i18n="@@login-emailError">Please, enter your email
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-icon matPrefix>lock_outline</mat-icon>
+            <input type="password" autocomplete="false" matInput placeholder="Password" formControlName="password">
+            <mat-error *ngIf="authForm.get('password')?.invalid" i18n="@@login-passwordError">Please, enter your
+              password
+            </mat-error>
+          </mat-form-field>
+          <div class="forgot">
+            <a i18n="@@login-forgot-password" routerLink="../reset">
+              Forgot your password?
+            </a>
+          </div>
+          <div class="form-group">
+                    <span class="text-danger" *ngIf="badLogin == true">
+                       <mat-error i18n="@@login-response-error">The email address or password is incorrect.</mat-error>
+                    </span>
+            <div *ngIf="showLoader">
+              <loader></loader>
+            </div>
+            <div *ngIf="loginError">
+              <div class="login-error-box">
+                <p>{{loginErrorMessage}}</p>
+              </div>
+            </div>
+            <button type="submit" mat-raised-button color="primary" i18n="@@login-button-login" [disabled]="actionStarted">LOGIN</button>
+<!--            <label class="or-text" i18n="@@login-or-text">or</label>-->
+<!--            <div class="google-login">-->
+<!--              <asl-google-signin-button *ngIf="!user"></asl-google-signin-button>-->
+<!--            </div>-->
+          </div>
+        </form>
+        <div class="register">
+          <span class="register-link" i18n="@@login-no-account">If You don't have an account yet please <a
+            routerLink='../sign-up'>Register here</a></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+

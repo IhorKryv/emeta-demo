@@ -1,0 +1,31 @@
+<div class="short-info">
+  <div class="short-info-header-inputs">
+    <mat-form-field class="short-info-input">
+      <mat-label i18n="@@profile-short-info-title">Title</mat-label>
+      <input matInput [(ngModel)]="shortInfo!.title!" placeholder="Section Title" (ngModelChange)="onTitleChange()">
+    </mat-form-field>
+    <mat-form-field class="short-info-input">
+      <mat-label i18n="@@profile-short-info-description">Description</mat-label>
+      <textarea matInput [(ngModel)]="shortInfo!.description!"  placeholder="Section Information" [rows]="2" maxlength="128" (ngModelChange)="onDescriptionChange()"></textarea>
+    </mat-form-field>
+  </div>
+  <h2 class="short-info-cards-title">Information Cards:</h2>
+  <span class="icons-info">You can select icons <a href="https://jossef.github.io/material-design-icons-iconfont/" target="_blank">here</a>. Just select the icon, copy it name and paste it into the [Icon] input</span>
+  <div class="short-info-cards">
+    <div *ngFor="let card of shortInfo!.cards" class="short-info-card">
+      <mat-icon>{{card.icon}}</mat-icon>
+      <mat-form-field class="short-info-input">
+        <mat-label i18n="@@profile-short-info-title">Icon</mat-label>
+        <input matInput [(ngModel)]="card.icon!" placeholder="Card Icon" (ngModelChange)="onCardIconChange(card.icon!, card.id!)" >
+      </mat-form-field>
+      <mat-form-field class="short-info-input">
+        <mat-label i18n="@@profile-short-info-title">Title</mat-label>
+        <input matInput [(ngModel)]="card.title!" placeholder="Card Title" (ngModelChange)="onCardTitleChange(card.title!, card.id!)" >
+      </mat-form-field>
+      <mat-form-field class="short-info-input">
+        <mat-label i18n="@@profile-short-info-description">Description</mat-label>
+        <textarea matInput [(ngModel)]="card.text!"  placeholder="Card Text" [rows]="7" maxlength="128" (ngModelChange)="onCardTextChange(card.text!, card.id!)"></textarea>
+      </mat-form-field>
+    </div>
+  </div>
+</div>

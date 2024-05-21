@@ -1,0 +1,28 @@
+<div>
+  <div class="info">
+    <h2 i18n="@@admin-storage-boards-info">At this moment you have <span>{{current}}</span> EMeta Boards in your
+      collection. You still can add <span>{{limit - current}}</span> boards
+    </h2>
+  </div>
+  <div *ngIf="showLoader">
+    <loader></loader>
+  </div>
+  <div class="admin-boards">
+    <div class="admin-board-container" *ngFor="let board of boards">
+      <div class="admin-board-card">
+        <div class="admin-board-content" (click)="openBoard(board)">
+          <img [src]="board.imageUrl" alt="board-cardback" [class]="isMobile ? 'mobile-board' : ''" />
+          <div class="admin-board-info">
+            <h2>{{board.name}}</h2>
+            <p>{{board.description}}</p>
+            <div class="admin-board-footer">
+            <span *ngIf="board.boardInCollection" class="already-in-collection" i18n="@@admin-storage-inCollection">
+               <mat-icon fontIcon="check_circle_outline"></mat-icon> In collection
+            </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

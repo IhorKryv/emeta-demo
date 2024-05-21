@@ -1,0 +1,32 @@
+<h1 mat-dialog-title i18n="@@pages-roles-creation">Role Creation</h1>
+<div mat-dialog-content>
+  <form [formGroup]="roleForm" class="role-dialog-content">
+    <mat-form-field appearance="outline">
+      <mat-label i18n="@@pages-roles-name">Role name</mat-label>
+      <input matInput formControlName="name" required>
+      <mat-error *ngIf="roleForm.get('name')?.invalid" i18n="@@pages-roles-error-name">Please set a role name</mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label i18n="@@pages-roles-description">Role description</mat-label>
+      <textarea matInput formControlName="description" required></textarea>
+      <mat-error *ngIf="roleForm.get('description')?.invalid" i18n="@@pages-roles-error-description">Please set a role description</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label i18n="@@pages-roles-permissions">Permissions</mat-label>
+      <mat-select formControlName="permissions" multiple required>
+        <mat-select-trigger>
+          {{roleForm.get('permissions')?.value![0] || ''}}
+          <span *ngIf="(roleForm.get('permissions')?.value?.length || 0) > 1" class="example-additional-selection">
+        (+{{(roleForm.get('permissions')?.value?.length || 0) - 1}} {{roleForm.get('permissions')?.value?.length === 2 ? 'other' : 'others'}})
+      </span>
+        </mat-select-trigger>
+        <mat-option *ngFor="let authority of authorities" [value]="authority">{{authority}}</mat-option>
+      </mat-select>
+      <mat-error *ngIf="roleForm.get('permissions')?.invalid" i18n="@@pages-roles-error-permissions">Please select at least one permission</mat-error>
+    </mat-form-field>
+  </form>
+</div>
+<div mat-dialog-actions>
+  <button mat-stroked-button (click)="onClose()" i18n="@@pages-roles-cancel">Cancel</button>
+  <button mat-flat-button color="primary" (click)="validate()" i18n="@@pages-roles-save">Save</button>
+</div>

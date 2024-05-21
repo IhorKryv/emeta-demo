@@ -1,0 +1,25 @@
+mat-form-field {
+  width: 100%;
+}
+
+.fields-container {
+  display: flex;
+  .left-field {
+    flex: 1;
+    margin-right: 5px;
+  }
+  .right-field {
+    flex: 1;
+    margin-left: 5px;
+  }
+}
+
+.action-buttons {
+  display: flex;
+  justify-content: end;
+}
+
+
+
+
+

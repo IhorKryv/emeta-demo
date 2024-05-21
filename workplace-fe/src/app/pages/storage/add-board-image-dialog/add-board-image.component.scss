@@ -1,0 +1,52 @@
+.board-image-dialog-content {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.image-field {
+  position: relative;
+
+  .board-background {
+    width: 100%;
+    max-height: 250px;
+    object-fit: cover;
+    object-position: top;
+    border-radius: 10px;
+  }
+
+  .remove-image {
+    transition: 0.2s;
+    position: absolute;
+    right: 4px;
+    top: 4px;
+    padding: 10px;
+    border-radius: 7px;
+    border: none;
+    background: #d14646;
+    color: white;
+    text-align: center;
+  }
+
+  .remove-image:hover {
+    transition: 0.2s;
+    cursor: pointer;
+    background: #e04c4c;
+  }
+}
+
+.no-image {
+  border: 1px dashed #5e53f7;
+  border-radius: 10px;
+  text-align: center;
+  font-size: 15px;
+  font-weight: 500;
+  min-height: 250px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.file-input {
+  margin-top: 25px;
+}

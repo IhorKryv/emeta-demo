@@ -1,0 +1,7 @@
+<nav mat-tab-nav-bar>
+  <a mat-tab-link routerLink="permissions" routerLinkActive="" #rlaP="routerLinkActive" [active]="rlaP.isActive" i18n="@@pages-security-tab-permissions">Permissions</a>
+  <a mat-tab-link routerLink="roles" routerLinkActive="" #rlaR="routerLinkActive" [active]="rlaR.isActive" i18n="@@pages-security-tab-roles">Roles</a>
+</nav>
+<div>
+  <router-outlet></router-outlet>
+</div>

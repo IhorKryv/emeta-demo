@@ -1,0 +1,35 @@
+<div *ngIf="profileAvailable" class="profile-page">
+  <div *ngIf="initialized" class="profile">
+    <div class="profile-sidebar">
+      <ng-container *ngFor="let item of tabs">
+        <a class="sidebar-tab" routerLink="{{item.name}}"
+           routerLinkActive="active">
+          <div class="sidebar-tab-icon">
+            <mat-icon>{{item.icon}}</mat-icon>
+          </div>
+          <div class="sidebar-tab-label">
+            {{item.title}}
+          </div>
+        </a>
+      </ng-container>
+      <a class="sidebar-tab" [href]="'/full-profile/' + currentId">
+        <div class="sidebar-tab-icon">
+          <mat-icon>open_in_new</mat-icon>
+        </div>
+        <div class="sidebar-tab-label">
+          Page Preview
+        </div>
+      </a>
+    </div>
+    <div class="profile-content">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+  <div *ngIf="!initialized">
+    <button mat-flat-button color="primary" (click)="initProfile()">Initialize profile</button>
+  </div>
+</div>
+<div *ngIf="!profileAvailable" class="profile-disabled">
+  <h1>Sorry, but your current plan doesn't allow Personal Page</h1>
+</div>
+

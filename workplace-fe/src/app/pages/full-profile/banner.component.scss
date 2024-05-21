@@ -1,0 +1,77 @@
+.banner {
+  display: flex;
+  min-height: 800px;
+  align-items: center;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  .banner-body {
+    display: flex;
+    gap: 100px;
+    align-items: center;
+
+    .left {
+      width: calc(50% - 50px);
+
+      h1 {
+        font-size: 52px;
+        font-weight: 1000;
+        color: #424242;
+      }
+
+      h2 {
+        font-size: 28px;
+        font-weight: 500;
+        color: #424242;
+      }
+
+      hr {
+        height: 5px;
+        background: #5e53f7;
+        border: none;
+        border-radius: 5px;
+        width: 100px;
+        margin: 25px 0 35px 0;
+      }
+
+      a {
+        display: block;
+        padding: 15px 25px;
+        background: #5e53f7;
+        max-width: 300px;
+        text-align: center;
+        text-decoration: none;
+        color: white;
+        border-radius: 15px;
+        font-size: 18px;
+        box-shadow: rgba(0, 0, 0, 0.45) 0px 25px 20px -20px;
+      }
+
+      a:hover {
+        transition: 0.3s;
+        cursor: pointer;
+        background: #424242;
+      }
+    }
+
+    .right {
+      width: calc(50% - 50px);
+
+      .banner-image {
+        padding: 25px;
+        text-align: center;
+
+        img {
+          width: 100%;
+          max-width: 500px;
+          border-radius: 15px;
+          max-height: 500px;
+          object-fit: cover;
+          box-shadow: rgba(0, 0, 0, 0.25) 0px 0.0625em 0.0625em, rgba(0, 0, 0, 0.25) 0px 0.125em 0.5em, rgba(255, 255, 255, 0.1) 0px 0px 0px 1px inset;
+        }
+      }
+    }
+  }
+
+}

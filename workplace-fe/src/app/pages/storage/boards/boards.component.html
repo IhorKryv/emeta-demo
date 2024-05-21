@@ -1,0 +1,28 @@
+<div>
+  <div *ngIf="showLoader">
+    <loader></loader>
+  </div>
+  <div class="admin-boards">
+    <div class="admin-board-container" *ngFor="let board of boards">
+      <div class="admin-board-card">
+        <div class="admin-board-content">
+          <img [src]="board.imageUrl" alt="board-image" [class]="isMobile ? 'mobile-board' : ''"/>
+          <div class="admin-board-info">
+            <h2>{{board.customName && board.customName.trim() !== '' ? board.customName : board.name}}</h2>
+            <p>{{board.customDescription && board.customDescription.trim() !== '' ? board.customDescription : board.description}}</p>
+            <div class="admin-board-footer">
+              <div class="actions">
+                <button class="edit-admin-board" mat-icon-button (click)="editBoard(board)">
+                  <mat-icon fontIcon="edit"></mat-icon>
+                </button>
+                <button class="show-admin-board" mat-icon-button (click)="openBoard(board)">
+                  <mat-icon fontIcon="remove_red_eye"></mat-icon>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

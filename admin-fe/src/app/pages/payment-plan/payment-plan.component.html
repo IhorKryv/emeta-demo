@@ -1,0 +1,7 @@
+<nav mat-tab-nav-bar>
+  <a mat-tab-link routerLink="plans" routerLinkActive="" #rlaR="routerLinkActive" [active]="rlaR.isActive" i18n="@@pages-payment-plan-plans">Plans</a>
+  <a mat-tab-link routerLink="preferences" routerLinkActive="" #rlaP="routerLinkActive" [active]="rlaP.isActive" i18n="@@pages-payment-plan-preferences">Preferences</a>
+</nav>
+<div>
+  <router-outlet></router-outlet>
+</div>

@@ -1,0 +1,68 @@
+<div>
+  <div class="content-header">
+    <div class="content-title">
+      <search-field (onUpdate)="doSearch($event)"></search-field>
+    </div>
+    <div class="content-action">
+      <button mat-raised-button color="primary" (click)="addNewUser()" i18n="@@pages-user-view-add-new">Add New</button>
+    </div>
+  </div>
+</div>
+<div>
+  <table mat-table [dataSource]="dataSource" aria-describedby="">
+    <ng-container matColumnDef="index">
+      <th mat-header-cell *matHeaderCellDef> No.</th>
+      <td mat-cell *matCellDef="let element; let i = index"> {{i + 1}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="username">
+      <th mat-header-cell *matHeaderCellDef i18n="@@pages-user-view-email"> Email</th>
+      <td mat-cell *matCellDef="let element"> {{element.username}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="firstName">
+      <th mat-header-cell *matHeaderCellDef i18n="@@pages-user-view-first-name"> First Name</th>
+      <td mat-cell *matCellDef="let element"> {{element.firstName}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="lastName">
+      <th mat-header-cell *matHeaderCellDef i18n="@@pages-user-view-last-name"> Last Name</th>
+      <td mat-cell *matCellDef="let element"> {{element.lastName}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="roles">
+      <th mat-header-cell *matHeaderCellDef i18n="@@pages-user-view-roles"> Roles</th>
+      <td mat-cell *matCellDef="let element"> {{element.roles.join(', ')}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="createdAt">
+      <th mat-header-cell *matHeaderCellDef i18n="@@pages-user-view-date"> Creation Date</th>
+      <td mat-cell *matCellDef="let element"> {{element.createdAt |  date:'medium'}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let element">
+        <button mat-icon-button color="primary" (click)="editUser(element)">
+          <mat-icon fontIcon="edit"></mat-icon>
+        </button>
+        <button mat-icon-button color="warn" (click)="onDeleteUser(element)">
+          <mat-icon fontIcon="delete"></mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+  <div *ngIf="showLoader">
+    <loader></loader>
+  </div>
+  <mat-paginator *ngIf="pagination"
+                 [hidePageSize]="true"
+                 [length]="pagination.totalItems"
+                 [pageSize]="pagination.size"
+                 (page)="onPageChange($event)"
+                 aria-label="Select page" i18n="@@pages-user-view-select-page">
+  </mat-paginator>
+</div>

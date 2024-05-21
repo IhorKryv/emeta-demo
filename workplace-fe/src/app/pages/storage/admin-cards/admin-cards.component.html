@@ -1,0 +1,45 @@
+<div class="deck-content">
+  <div class="deck-left">
+    <div class="deck-info-content">
+      <h2>{{deck.name}}</h2>
+      <div class="deck-info">
+        <p>{{deck.description}}</p>
+        <span><mat-icon>{{deck.available ? 'check' : 'close'}}</mat-icon> Available</span>
+      </div>
+    </div>
+    <h2 class="card-back-title">Card Back</h2>
+    <div class="deck-back-card-container">
+      <ng-container *ngIf="deck.cardBackUrl; else uploadTemplate">
+        <img class="card-back-image" [src]="deck.cardBackUrl"/>
+        <button mat-flat-button color="primary" class="remove-card-back-button" (click)="removeCardBackFromDeck()">Remove Card Back</button>
+      </ng-container>
+      <ng-template #uploadTemplate>
+        <input type="file" class="file-input"
+               (change)="onFileSelected($event)">
+      </ng-template>
+    </div>
+  </div>
+  <div class="deck-right">
+    <h2>Upload cards</h2>
+    <div class="deck-cards-upload">
+      <div class="file-upload" appDrag (files)="uploadCards($event)">
+        <div class="upload-text">
+          <mat-icon>upload_file</mat-icon>
+          <span>Drop your cards here</span>
+          <p>Supported types: jpg, jpeg, png</p>
+        </div>
+      </div>
+    </div>
+    <h2 class="cards-title">Cards</h2>
+    <div class="deck-cards-list">
+      <div class="card" *ngFor="let card of deckCards">
+        <div class="card-body">
+          <img class="card-image" src="{{card.url}}"/>
+          <button class="remove-card-button" (click)="removeCard(card.id!)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,9 @@
+FROM amazoncorretto:17-alpine-jdk as builder
+
+RUN apk add maven
+COPY . .
+RUN mvn install
+
+FROM amazoncorretto:17-alpine-jdk
+COPY --from=builder  ./target/eMetaPlus-admin.jar ./eMetaPlus-admin.jar
+CMD ["java","-jar","./eMetaPlus-admin.jar"]

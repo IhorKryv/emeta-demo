@@ -1,0 +1,33 @@
+<div class="content-header">
+  <div class="add-board">
+    <button mat-raised-button color="primary" (click)="manageBoard()" i18n="@@pages-board-add-new">Add New</button>
+  </div>
+</div>
+<div *ngIf="showLoader">
+  <loader></loader>
+</div>
+<div class="boards-content">
+  <div class="board-container" *ngFor="let board of boards">
+    <div class="board-body">
+      <div class="board-card">
+        <div class="board-image">
+          <img src="{{board.imageUrl}}" />
+        </div>
+        <div class="board-content">
+          <div class="board-info">
+            <h2>{{board.name}}</h2>
+            <p>{{board.description}}</p>
+          </div>
+          <div class="board-actions">
+            <button mat-icon-button color="primary" (click)="manageBoard(board)">
+              <mat-icon fontIcon="edit"></mat-icon>
+            </button>
+            <button mat-icon-button color="warn" (click)="onBoardDelete(board)">
+              <mat-icon fontIcon="delete"></mat-icon>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

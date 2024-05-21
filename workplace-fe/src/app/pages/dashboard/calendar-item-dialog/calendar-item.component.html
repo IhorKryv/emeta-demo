@@ -1,0 +1,69 @@
+<h1 mat-dialog-title>
+  <ng-container i18n="@@sessions-information">Session Information</ng-container>
+  <span>{{session.sessionStatus}}</span>
+</h1>
+<div *ngIf="!isMobile" mat-dialog-content>
+  <div class="session">
+    <div class="session-info">
+      <div class="session-title">
+        <h2>{{session.name}}</h2>
+      </div>
+      <p>{{session.description}}</p>
+      <div class="session-icons">
+        <div class="session-timers">
+          <span><mat-icon fontIcon="timer"></mat-icon> {{session.startTime }}</span>
+          <span><mat-icon fontIcon="timer_off"></mat-icon> {{session.endTime }}</span>
+          <span><mat-icon fontIcon="access_time"></mat-icon> {{session.sessionDuration}} min.</span>
+        </div>
+
+        <div class="open-session">
+          <a *ngIf="session.url" [href]="session.url" i18n="@@session-open-link"><mat-icon fontIcon="open_in_new"></mat-icon> Open Session</a>
+        </div>
+
+      </div>
+      <div class="session-clients">
+        <h2 i18n="@@sessions-clients-on-sessions">Clients on Session</h2>
+        <div *ngIf="session.clients" class="client-list">
+          <div class="client-card-box" *ngFor="let client of session.clients">
+            <div class="client-card">
+              <h3>{{client.firstName}} {{client.lastName}}</h3>
+              <div class="client-card-info">
+                <span><mat-icon fontIcon="mail_outline" [style]="hideAdditionalIcon(client.email!) ? 'display: none' : ''"></mat-icon> {{client.email}}</span>
+                <span><mat-icon fontIcon="phone_android" [style]="hideAdditionalIcon(client.phone!) ? 'display: none' : ''"></mat-icon> {{client.phone}}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div *ngIf="isMobile" class="session-mobile">
+  <div class="session-mobile-header">
+    <h2>{{session.name}}</h2>
+    <p>{{session.description}}</p>
+  </div>
+  <div class="session-mobile-content">
+    <span><mat-icon fontIcon="timer"></mat-icon> {{session.startTime}}</span>
+    <span><mat-icon fontIcon="timer_off"></mat-icon> {{session.endTime}}</span>
+    <span><mat-icon fontIcon="access_time"></mat-icon> {{session.sessionDuration}} min.</span>
+    <a *ngIf="session.url" [href]="session.url" i18n="@@session-open-link"><mat-icon fontIcon="open_in_new"></mat-icon> Open Session</a>
+  </div>
+  <div class="session-mobile-clients">
+    <h2 i18n="@@sessions-mobile-clients-on-sessions">Clients on Session</h2>
+    <div *ngIf="session.clients" class="mobile-client-list">
+      <div class="mobile-client-card-box" *ngFor="let client of session.clients">
+        <div class="mobile-client-card">
+          <h3>{{client.firstName}} {{client.lastName}}</h3>
+          <div class="mobile-client-card-info">
+            <span><mat-icon fontIcon="mail_outline"></mat-icon> {{client.email}}</span>
+            <span><mat-icon fontIcon="phone_android"></mat-icon> {{client.phone}}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div mat-dialog-actions class="mat-dialog-actions">
+  <button mat-stroked-button (click)="onClose()" i18n="@@dialog-close">Close</button>
+</div>

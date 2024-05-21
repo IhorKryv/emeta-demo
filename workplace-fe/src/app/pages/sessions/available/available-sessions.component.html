@@ -1,0 +1,144 @@
+<div [class]="isMobile ? 'content-header-mobile' : 'content-header'">
+  <div class="content-title">
+    <search-field (onUpdate)="doSearch($event)"></search-field>
+  </div>
+  <instant-session [callback]="instantSessionCallback"></instant-session>
+  <div *ngIf="!isMobile" class="user-info">
+    <button mat-raised-button color="primary" (click)="addNewSession()" i18n="@@available-sessions-add-new">Add New
+    </button>
+  </div>
+</div>
+<div *ngIf="isMobile" class="add-button-mobile">
+  <button mat-fab color="primary" (click)="addNewSession()" aria-label="Add session">
+    <mat-icon>add</mat-icon>
+  </button>
+</div>
+<div>
+  <table mat-table [dataSource]="dataSource" aria-describedby="" *ngIf="!isMobile">
+    <ng-container matColumnDef="index">
+      <th mat-header-cell *matHeaderCellDef> No.</th>
+      <td mat-cell *matCellDef="let session; let i = index"> {{i + 1}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef i18n="@@available-sessions-table-name"> Name</th>
+      <td mat-cell *matCellDef="let session"> {{session.name}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="startTime">
+      <th mat-header-cell *matHeaderCellDef i18n="@@available-sessions-table-startTime"> Start Time</th>
+      <td mat-cell *matCellDef="let session"> {{session.startTime | date:'medium'}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="status">
+      <th mat-header-cell *matHeaderCellDef i18n="@@available-sessions-table-status"> Status</th>
+      <td mat-cell *matCellDef="let session"> {{session.sessionStatus}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="session-actions">
+      <th mat-header-cell *matHeaderCellDef i18n="@@available-sessions-table-startTime"> Actions</th>
+      <td mat-cell *matCellDef="let session">
+        <ng-container *ngIf="!session.inProgress; else stopButton">
+          <button mat-flat-button color="primary" (click)="onSessionStart(session)" i18n="@@available-sessions-table-startSession">
+            <mat-icon style="margin-top: -3px;" fontIcon="play_arrow"></mat-icon> Start Session
+          </button>
+        </ng-container>
+        <ng-template #stopButton>
+          <button mat-flat-button color="warn" (click)="onSessionStop(session)" i18n="@@available-sessions-table-stopSession">
+            <mat-icon style="margin-top: -3px;" fontIcon="play_disabled"></mat-icon> Stop Session
+          </button>
+        </ng-template>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let session">
+        <button mat-icon-button color="primary" (click)="addClients(session)">
+          <mat-icon fontIcon="person_add"></mat-icon>
+        </button>
+        <button mat-icon-button color="primary" (click)="viewSession(session)">
+          <mat-icon fontIcon="remove_red_eye"></mat-icon>
+        </button>
+        <button mat-icon-button color="primary" (click)="editSession(session)">
+          <mat-icon fontIcon="edit"></mat-icon>
+        </button>
+        <ng-container>
+          <button mat-icon-button color="warn" (click)="onSessionDelete(session)">
+            <mat-icon fontIcon="delete"></mat-icon>
+          </button>
+        </ng-container>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+    <tr class="mat-row" *matNoDataRow>
+      <td class="mat-cell" [attr.colspan]="displayedColumns.length">
+        No data has been found by search criteria.
+      </td>
+    </tr>
+  </table>
+  <div *ngIf="isMobile" class="mobile-content">
+    <div class="session-card-box" *ngFor="let session of dataSource">
+      <div class="session-card">
+        <div class="session-card-status">
+          <p>
+            <mat-icon>save</mat-icon>
+            {{session.createdAt | date: 'short'}}</p>
+          <span>{{session.sessionStatus}}</span>
+        </div>
+        <div class="session-card-header">
+          <h2>{{session.name}}</h2>
+        </div>
+        <div class="session-content">
+          <p>{{session.description}}</p>
+          <div class="session-info">
+            <span><mat-icon>calendar_month</mat-icon>
+              {{session.startTime | date: 'medium' }}</span>
+            <span i18n="@@sessions-mobile-duration"><mat-icon>access_time</mat-icon>
+              {{session.sessionDuration}} min.</span>
+          </div>
+        </div>
+        <div class="session-actions">
+          <ng-container *ngIf="session.sessionStatus !== 'FINISHED' && session.sessionStatus !== 'ARCHIVED'">
+            <ng-container *ngIf="!session.inProgress && session.sessionStatus == 'NEW'; else stopButton">
+              <button mat-icon-button class="green-icon" (click)="onSessionStart(session)">
+                <mat-icon fontIcon="play_arrow"></mat-icon>
+              </button>
+            </ng-container>
+            <ng-template #stopButton>
+              <button mat-icon-button class="red-icon" (click)="onSessionStop(session)">
+                <mat-icon fontIcon="play_disabled"></mat-icon>
+              </button>
+            </ng-template>
+            <button mat-icon-button class="green-icon" (click)="addClients(session)">
+              <mat-icon fontIcon="person_add"></mat-icon>
+            </button>
+          </ng-container>
+          <button mat-icon-button class="default-icon" (click)="viewSession(session)">
+            <mat-icon fontIcon="remove_red_eye"></mat-icon>
+          </button>
+          <button mat-icon-button class="orange-icon" (click)="editSession(session)">
+            <mat-icon fontIcon="edit"></mat-icon>
+          </button>
+          <button mat-icon-button class="red-icon" (click)="onSessionDelete(session)">
+            <mat-icon fontIcon="delete"></mat-icon>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="showLoader">
+    <loader></loader>
+  </div>
+  <mat-paginator *ngIf="pagination"
+                 [hidePageSize]="true"
+                 [length]="pagination.totalItems"
+                 [pageSize]="pagination.size"
+                 (page)="onPageChange($event)"
+                 aria-label="Select page"
+                 [class]="isMobile ? 'mobile-pagination' : 'pagination'">
+  </mat-paginator>
+</div>

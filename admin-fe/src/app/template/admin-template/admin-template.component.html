@@ -1,0 +1,11 @@
+<div class="page">
+  <div class="container">
+    <div side-bar [items]="items" [ngClass]="'sidebar'" [onLogout]="logout"></div>
+    <div class="main">
+      <page-header [pageTitle]="pageTitle" [userInfo]="userInfo"></page-header>
+      <div class="content">
+        <router-outlet (activate)="fillTemplate($event)"></router-outlet>
+      </div>
+    </div>
+  </div>
+</div>

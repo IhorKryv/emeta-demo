@@ -1,0 +1,97 @@
+.contact {
+  padding: 100px 0;
+
+  .contact-content {
+    display: flex;
+
+    .right {
+      display: flex;
+      width: 50%;
+      position: relative;
+      justify-content: flex-end;
+
+      .color-box {
+        width: 90%;
+        min-height: 500px;
+        background: #e3e3e3;
+        border-radius: 15px;
+      }
+
+      .contact-items {
+        position: absolute;
+        display: flex;
+        flex-direction: column;
+        padding: 25px 50px 50px 50px;
+        background: #5e53f7;
+        border-radius: 15px;
+        bottom: -45px;
+        left: 15px;
+        border: none;
+        color: white;
+        text-align: center;
+        align-items: center;
+
+        mat-icon {
+          width: 96px;
+          height: 96px;
+          font-size: 96px;
+          margin-bottom: 5px;
+        }
+
+        h2 {
+          font-size: 32px;
+          margin-bottom: 25px;
+          padding-bottom: 25px;
+          font-weight: 800;
+        }
+
+        span {
+          font-size: 20px;
+          font-weight: 600;
+        }
+
+        p {
+          font-size: 18px;
+          font-weight: 500;
+        }
+      }
+    }
+
+    .left {
+      width: 50%;
+      padding-right: 75px;
+
+      h1 {
+        font-size: 48px;
+        font-weight: 800;
+        color: #424242;
+      }
+
+      p {
+        font-size: 22px;
+        padding: 0;
+        margin: 0 0 50px 0;
+        color: #424242;
+      }
+
+      a {
+        display: block;
+        padding: 15px 25px;
+        background: #5e53f7;
+        max-width: 300px;
+        text-align: center;
+        text-decoration: none;
+        color: white;
+        border-radius: 15px;
+        font-size: 18px;
+        box-shadow: rgba(0, 0, 0, 0.45) 0px 25px 20px -20px;
+      }
+
+      a:hover {
+        transition: 0.3s;
+        cursor: pointer;
+        background: #424242;
+      }
+    }
+  }
+}

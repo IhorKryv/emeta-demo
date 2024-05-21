@@ -1,0 +1,26 @@
+<h1 mat-dialog-title>
+  <ng-container i18n="@@storage-board-image-editor">Board Background Editor</ng-container>
+</h1>
+<div mat-dialog-content>
+  <div>
+    <ng-container *ngIf="board.image || previewUrl; else noImage">
+      <div class="image-field">
+        <img class="board-background" [src]="previewUrl ? previewUrl : board.imageUrl"/>
+        <button class="remove-image" (click)="removeImage()">X</button>
+      </div>
+    </ng-container>
+    <ng-template #noImage>
+      <span class="no-image" i18n="@@storage-board-image-notExists">
+        Looks like you didn't add any background image yet
+      </span>
+    </ng-template>
+  </div>
+  <div *ngIf="!board.image">
+    <input type="file" class="file-input"
+           (change)="onFileSelected($event)">
+  </div>
+</div>
+<div mat-dialog-actions>
+  <button mat-stroked-button (click)="onClose()" i18n="@@dialog-cancel">Cancel</button>
+  <button mat-flat-button color="primary" (click)="onSave()" [disabled]="saveDisabled" i18n="@@dialog-save">Save</button>
+</div>

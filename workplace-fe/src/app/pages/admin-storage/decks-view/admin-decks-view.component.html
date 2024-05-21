@@ -1,0 +1,31 @@
+<div>
+  <div class="info">
+    <h2 i18n="@@admin-storage-decks-info">At this moment you have <span>{{current}}</span> EMeta Decks in your collection. You still can add
+      <span>{{limit - current}}</span> decks.</h2>
+  </div>
+  <div *ngIf="showLoader">
+    <loader></loader>
+  </div>
+  <div class="admin-decks">
+    <div class="admin-deck-container" *ngFor="let deck of decks">
+      <div class="admin-deck-card">
+        <div class="admin-deck-content" (click)="openDeck(deck)">
+          <img [src]="getCardBackImage(deck)" alt="deck-cardback"/>
+          <div class="admin-deck-info">
+            <h2>{{deck.name}}</h2>
+            <p>{{deck.description}}</p>
+            <div class="admin-deck-footer">
+            <span>
+            <mat-icon fontIcon="collections"></mat-icon>
+              {{deck.cardsCount}}
+            </span>
+              <span *ngIf="deck.deckInCollection" class="already-in-collection" i18n="@@admin-storage-inCollection">
+               <mat-icon fontIcon="check_circle_outline"></mat-icon> In collection
+            </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

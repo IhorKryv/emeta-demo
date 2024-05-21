@@ -1,0 +1,50 @@
+.add-button-mobile {
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+}
+
+.boards-mobile-content {
+  padding-top: 50px;
+
+  .boards-card-box {
+    margin-bottom: 25px;
+
+    .boards-card-body {
+      padding: 15px;
+      border-radius: 5px;
+      box-shadow: 0 2px 5px 2px #0000004d;
+
+      .boards-card-content {
+
+        h1 {
+          font-size: 22px;
+          font-weight: 600;
+          padding: 0;
+          margin: 0 0 5px;
+        }
+
+        p {
+          font-size: 14px;
+          padding: 0;
+          margin: 0 0 15px;
+        }
+      }
+      .boards-card-actions {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-direction: row;
+      }
+    }
+  }
+}
+
+.boards-card-actions-add-or-edit {
+  margin-right: 5px;
+}
+
+.pagination-mobile {
+  float: left;
+  margin-bottom: 10px;
+}

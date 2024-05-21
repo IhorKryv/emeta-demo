@@ -1,0 +1,78 @@
+<h1 mat-dialog-title [class]="this.isMobile ? 'mobile-title' : ''">
+  <ng-container i18n="@@sessions-add-client">Session Clients Manager</ng-container>
+</h1>
+<div mat-dialog-content>
+  <div *ngIf="!isMobile" class="add-client-dialog">
+    <div class="selected-clients">
+      <h2 i18n="@@sessions-available-clients">Available Clients</h2>
+      <ng-container *ngIf="availableClients.length > 0; else emptySelected">
+        <div *ngFor="let client of availableClients" class="client-box">
+          <div class="client">
+            <div class="client-info">
+              <h3>{{client.firstName}} {{client.lastName}}</h3>
+              <div class="client-additional">
+                <span><mat-icon fontIcon="mail_outline" [style]="hideAdditionalIcon(client.email!) ? 'display: none' : ''"></mat-icon> {{client.email}}</span>
+                <span><mat-icon fontIcon="phone_android" [style]="hideAdditionalIcon(client.phone!) ? 'display: none' : ''"></mat-icon> {{client.phone}}</span>
+              </div>
+            </div>
+            <div class="client-action" (click)="addClient(client)">
+              <mat-icon fontIcon="arrow_forward_ios"></mat-icon>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+      <ng-template #emptySelected>
+        <h3 i18n="@@sessions-no-available-clints">There are no more available clients</h3>
+      </ng-template>
+    </div>
+    <div class="available-clients">
+      <h2 i18n="@@sessions-clients-on-sessions">Clients on Session</h2>
+      <ng-container *ngIf="session.clients.length > 0; else emptyAvailable">
+        <div *ngFor="let client of session.clients" class="client-box">
+          <div class="client">
+            <div class="client-action" (click)="removeClient(client)">
+              <mat-icon fontIcon="arrow_back_ios_new"></mat-icon>
+            </div>
+            <div class="client-info">
+              <h3>{{client.firstName}} {{client.lastName}}</h3>
+              <div class="client-additional">
+                <span><mat-icon fontIcon="mail_outline" [style]="hideAdditionalIcon(client.email!) ? 'display: none' : ''"></mat-icon> {{client.email}}</span>
+                <span><mat-icon fontIcon="phone_android" [style]="hideAdditionalIcon(client.phone!) ? 'display: none' : ''"></mat-icon> {{client.phone}}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+      <ng-template #emptyAvailable>
+        <h3>This session has no clients yet</h3>
+      </ng-template>
+    </div>
+  </div>
+
+  <div *ngIf="isMobile" class="mobile-add-clients">
+    <div class="mobile-add-clients-info">
+      <h1 i18n="@@sessions-client-mobile-select">Click on the clients you want to add to session</h1>
+    </div>
+    <ng-container *ngIf="availableClients.length > 0; else noClients">
+      <div *ngFor="let client of availableClients" class="client-card-box">
+        <div class="client-card-body" (click)="selectOrDeselectClient(client)">
+          <div class="client-card-header">
+            <h1>{{client.firstName}} {{client.lastName}}</h1>
+            <mat-icon class="checked-client" *ngIf="isClientSelected(client)">checked</mat-icon>
+          </div>
+          <div class="client-card-content">
+              <span><mat-icon fontIcon="mail_outline"></mat-icon> {{client.email}}</span>
+              <span><mat-icon fontIcon="phone_android"></mat-icon> {{client.phone}}</span>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+    <ng-template #noClients>
+      <h3 i18n="@@sessions-no-more-clients">There are no available clients</h3>
+    </ng-template>
+  </div>
+</div>
+<div mat-dialog-actions>
+  <button mat-stroked-button (click)="onClose()" i18n="@@dialog-cancel">Cancel</button>
+  <button mat-flat-button color="primary" (click)="onSave()" i18n="@@dialog-save">Save</button>
+</div>

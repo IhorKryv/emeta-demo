@@ -1,0 +1,21 @@
+.content-header {
+  width: 100%;
+  display: flex;
+  position: relative;
+  align-items: center;
+
+  .content-title {
+    flex: 1;
+
+    .search-field {
+      width: 100%;
+    }
+
+    padding-right: 50px;
+  }
+
+  .content-action {
+    flex: 1;
+    align-self: center;
+  }
+}

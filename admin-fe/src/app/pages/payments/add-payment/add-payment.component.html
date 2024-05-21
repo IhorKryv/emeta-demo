@@ -1,0 +1,22 @@
+<h1 mat-dialog-title>
+  <ng-container *ngIf="!payment.id; else editMode" i18n="@@pages-payments-order-creation">Order Creation</ng-container>
+  <ng-template #editMode i18n="@@pages-payments-order-editing">Order Editing</ng-template>
+</h1>
+<div mat-dialog-content *ngIf="workplaceAutocomplete">
+  <form [formGroup]="paymentForm">
+
+    <autocomplete [label]="'Workplace'" i18n="@@pages-payments-autocomplete-workplace"[placeholder]="'Select workplace'"  [autocompleteData]="workplaceAutocomplete"></autocomplete>
+
+    <mat-form-field appearance="outline">
+      <mat-label i18n="@@pages-payments-plan-description">Plan description</mat-label>
+      <input matInput formControlName="description" required>
+      <mat-error *ngIf="paymentForm.get('description')?.invalid" i18n="@@pages-payments-plan-description-error">Please set a description</mat-error>
+    </mat-form-field>
+
+  </form>
+</div>
+
+<div mat-dialog-actions class="action-buttons">
+  <button mat-stroked-button (click)="onClose()" i18n="@@pages-payments-cancel">Cancel</button>
+  <button mat-flat-button color="primary" (click)="onSave()" i18n="@@pages-payments-save">Save</button>
+</div>

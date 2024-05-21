@@ -1,0 +1,77 @@
+@use '/src/common/palett';
+@use "sass:map";
+
+@use '@angular/material' as mat;
+
+.page {
+
+  .container {
+    min-width: 360px;
+    background-color: palett.$container-background-color;
+    margin: 0 auto;
+    display: flex;
+    min-height: 100vh;
+
+    .main {
+      flex: 1 1 auto;
+      flex-direction: row;
+      box-shadow: 3px 0 5px 1px palett.$secondary-text-color;
+      width: 100%;
+
+      .content {
+        flex: 1 0 auto;
+        padding: 0 40px;
+      }
+
+    }
+  }
+}
+
+.temporary-plan {
+  transition: 0.3s;
+  z-index: 100;
+  padding: 5px 50px;
+  background: #ffc05b;
+  border-radius: 15px;
+  margin: 15px;
+  max-width: 350px;
+  right: 25%;
+  position: absolute;
+
+  h1 {
+    padding: 0 0 5px 0;
+    margin: 0;
+    font-size: 18px;
+    color: #424242;
+  }
+
+  p {
+    padding: 0 0 5px 0;
+    margin: 0;
+    font-size: 14px;
+    color: #424242;
+
+    span {
+      font-weight: 800;
+      color: #424242;
+    }
+  }
+
+  span {
+    color: #7a7a7a;
+    font-size: 12px;
+  }
+}
+
+.temporary-plan:hover {
+  transition: 0.3s;
+  cursor: pointer;
+  background: #d0963a;
+}
+
+@media (max-width: 1200px) {
+  .temporary-plan {
+    position: relative;
+    right: auto;
+  }
+}

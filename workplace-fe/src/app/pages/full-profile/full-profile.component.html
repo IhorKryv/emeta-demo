@@ -1,0 +1,227 @@
+<div>
+  <div *ngIf="fullProfile!.banner!" class="desktop-section banner" [style.background-image]="'url(' + backgroundImageURL + ')'">
+    <div class="profile-container">
+      <div class="banner-body">
+        <div class="left">
+          <h1>{{fullProfile!.banner!.title!}}</h1>
+          <h2>{{fullProfile!.banner!.info!}}</h2>
+          <hr/>
+          <a href="#">Записатись на прийом</a>
+        </div>
+        <div class="right">
+          <div class="banner-image">
+            <img [src]="bannerImage" alt="banner-image"/>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="fullProfile!.banner!" class="mobile-section mobile-banner" [style.background-image]="'url(' + backgroundImageURL + ')'">
+    <div class="profile-container">
+      <div class="mobile-banner-body">
+        <div class="mobile-container">
+          <div class="mobile-banner-image">
+            <img [src]="bannerImage" alt="banner-image"/>
+          </div>
+        </div>
+        <div class="mobile-container">
+          <h1>{{fullProfile?.banner?.title! || ''}}</h1>
+          <h2>{{fullProfile?.banner?.info!  || ''}}</h2>
+          <a href="#">Записатись на прийом</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="fullProfile!.shortInfo!"class="desktop-section short-info">
+    <div class="profile-container">
+      <div class="short-info-header">
+        <h1>{{fullProfile!.shortInfo!.title!}}</h1>
+        <p class="short-info-description">{{fullProfile!.shortInfo!.description!}}</p>
+        <div class="short-info-cards">
+          <div *ngFor="let infoCard of fullProfile!.shortInfo!.cards" class="short-info-card">
+            <div class="short-info-card-content">
+              <div class="front">
+                <mat-icon>{{infoCard.icon!}}</mat-icon>
+                <h2>{{infoCard.title!}}</h2>
+              </div>
+              <div class="back">
+                <p class="info-card-text">{{infoCard.text!}}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="fullProfile!.shortInfo!" class="mobile-section mobile-short-info">
+    <div class="profile-container">
+      <div class="mobile-short-info-header">
+        <h1>{{fullProfile!.shortInfo!.title!  || ''}}</h1>
+        <p class="mobile-short-info-description">{{fullProfile!.shortInfo!.description!  || ''}}</p>
+        <div class="mobile-short-info-cards">
+          <div *ngFor="let infoCard of fullProfile!.shortInfo!.cards; let i = index"
+               [ngClass]="i === mobileInfoCardIndex ? 'show-item' : 'hide-item'" class="mobile-short-info-card">
+            <div class="mobile-short-info-card-content">
+              <mat-icon>{{infoCard.icon!  || ''}}</mat-icon>
+              <h2>{{infoCard.title!  || ''}}</h2>
+              <p class="mobile-info-card-text">{{infoCard.text!  || ''}}</p>
+            </div>
+          </div>
+        </div>
+        <div class="mobile-arrows">
+          <button (click)="slideLeftMobile('info')">
+            <mat-icon>arrow_back_ios_new</mat-icon>
+          </button>
+          <button (click)="slideRightMobile('info')">
+            <mat-icon>arrow_forward_ios</mat-icon>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="fullProfile!.schedule!" class="desktop-section schedule">
+    <div class="profile-container">
+      <div class="schedule-content">
+        <div class="left">
+          <div class="color-box"></div>
+          <div *ngIf="fullProfile?.schedule?.items" class="schedule-items">
+            <h2>Робочі години</h2>
+            <div *ngFor="let key of Object.keys(fullProfile!.schedule!.items)" class="schedule-item">
+              <span>{{getScheduleDay(key)}} </span> {{fullProfile!.schedule!.items[key]}}
+            </div>
+          </div>
+        </div>
+        <div class="right">
+          <h1>{{fullProfile?.schedule?.title! || ''}}</h1>
+          <p>{{fullProfile?.schedule?.shortText! || ''}}</p>
+          <hr/>
+          <a href="#">Записатись на прийом</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="fullProfile!.schedule!" class="mobile-section mobile-schedule">
+    <div class="profile-container">
+      <div class="mobile-schedule-content">
+        <div class="mobile-schedule-container">
+          <div *ngIf="fullProfile?.schedule?.items" class="schedule-items">
+            <h2>Робочі години</h2>
+            <div *ngFor="let key of Object.keys(fullProfile!.schedule!.items)" class="mobile-schedule-item">
+              <span>{{getScheduleDay(key)}} </span> {{fullProfile!.schedule!.items[key]}}
+            </div>
+          </div>
+        </div>
+        <div class="mobile-schedule-text">
+          <h1>{{fullProfile?.schedule?.title! || ''}}</h1>
+          <p>{{fullProfile?.schedule?.shortText! || ''}}</p>
+          <a href="#">Записатись на прийом</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="fullProfile!.profileDeck!" class="desktop-section decks">
+    <div class="profile-container">
+      <div class="decks-content">
+        <div class="left">
+          <span>Мої матеріали</span>
+          <h1>{{fullProfile?.profileDeck?.title! || ''}}</h1>
+          <p>{{fullProfile?.profileDeck?.info! || ''}}</p>
+
+          <div class="slider-controls">
+            <div class="dots">
+              <div class="dot" [ngClass]="i === currentDeckIndex ? 'selected-dot': ''"
+                   *ngFor="let item of fullProfile!.profileDeck!.decks; let i = index"></div>
+            </div>
+            <div class="arrows">
+              <button (click)="sliderLeft()">
+                <mat-icon>arrow_back_ios_new</mat-icon>
+              </button>
+              <button (click)="slideRight()">
+                <mat-icon>arrow_forward_ios</mat-icon>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="right">
+          <div class="decks-slider">
+            <div *ngFor="let deck of fullProfile?.profileDeck?.decks!; let i = index">
+              <div class="card" [ngClass]="i == currentDeckIndex ? 'show-item' : 'hide-item'">
+                <img [src]="deck.image!" alt="deck-image-{{i}}"/>
+                <h2>{{deck.title}}</h2>
+                <p>{{deck.info}}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="fullProfile!.profileDeck!" class="mobile-section mobile-decks">
+    <div class="profile-container">
+      <div class="mobile-decks-content">
+        <div class="mobile-decks-text">
+          <h1>{{fullProfile?.profileDeck?.title! || ''}}</h1>
+          <p>{{fullProfile?.profileDeck?.info! || ''}}</p>
+
+        </div>
+        <div class="mobile-deck-cards">
+          <div *ngFor="let deck of fullProfile?.profileDeck?.decks!; let i = index" class="mobile-card"
+               [ngClass]="i == mobileDeckIndex ? 'show-item' : 'hide-item'">
+            <img [src]="deck.image!" alt="deck-image-{{i}}"/>
+            <h2>{{deck.title}}</h2>
+            <p>{{deck.info}}</p>
+          </div>
+          <div class="mobile-arrows">
+            <button (click)="slideLeftMobile('decks')">
+              <mat-icon>arrow_back_ios_new</mat-icon>
+            </button>
+            <button (click)="slideRightMobile('decks')">
+              <mat-icon>arrow_forward_ios</mat-icon>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="fullProfile!.profileContact!" class="desktop-section contact">
+    <div class="profile-container">
+      <div class="contact-content">
+        <div class="left">
+          <h1>{{fullProfile?.profileContact?.title! || ''}}</h1>
+          <p>{{fullProfile?.profileContact?.shortText! || ''}}</p>
+          <a href="#">Записатись на прийом</a>
+        </div>
+        <div class="right">
+          <div class="color-box"></div>
+          <div class="contact-items">
+            <mat-icon>contact_support</mat-icon>
+            <h2>Маєте запитання?</h2>
+            <span>{{fullProfile?.profileContact?.email! || ''}}</span>
+            <p>або</p>
+            <span>{{fullProfile?.profileContact?.phone! || ''}}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="fullProfile!.profileContact!" class="mobile-section mobile-contact">
+    <div class="profile-container">
+      <div class="mobile-contact-content">
+        <div class="mobile-text">
+          <h1>{{fullProfile?.profileContact?.title! || ''}}</h1>
+          <p>{{fullProfile?.profileContact?.shortText! || ''}}</p>
+          <a href="#">Записатись на прийом</a>
+        </div>
+        <div class="mobile-contact-box">
+          <div class="mobile-contact-items">
+            <mat-icon>contact_support</mat-icon>
+            <h2>Маєте запитання?</h2>
+            <span>{{fullProfile?.profileContact?.email! || ''}}</span>
+            <p>або</p>
+            <span>{{fullProfile?.profileContact?.phone! || ''}}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

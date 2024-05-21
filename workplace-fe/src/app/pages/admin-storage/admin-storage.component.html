@@ -1,0 +1,7 @@
+<nav mat-tab-nav-bar>
+  <a mat-tab-link routerLink="decks" routerLinkActive="" #rlaP="routerLinkActive" [active]="rlaP.isActive" i18n="@@admin-storage-decks">EMeta Decks</a>
+  <a mat-tab-link routerLink="boards" routerLinkActive="" #rlaB="routerLinkActive" [active]="rlaB.isActive" i18n="@@admin-storage-boards">EMeta Boards</a>
+</nav>
+<div>
+  <router-outlet></router-outlet>
+</div>

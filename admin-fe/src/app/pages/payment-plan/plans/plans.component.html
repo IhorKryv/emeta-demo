@@ -1,0 +1,82 @@
+<div class="content-header">
+  <div class="content-title">
+    <search-field (onUpdate)="doSearch($event)"></search-field>
+  </div>
+  <div class="content-action">
+    <button mat-raised-button color="primary" (click)="addNewPlan()" i18n="@@pages-plans-add-new">Add New</button>
+  </div>
+</div>
+<div>
+  <table mat-table [dataSource]="dataSource" aria-describedby="">
+    <ng-container matColumnDef="index">
+      <th mat-header-cell *matHeaderCellDef> No.</th>
+      <td mat-cell *matCellDef="let element; let i = index"> {{i + 1}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef i18n="@@pages-plans-name"> Name</th>
+      <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="description">
+      <th mat-header-cell *matHeaderCellDef i18n="@@pages-plans-description"> Description</th>
+      <td mat-cell *matCellDef="let element"> {{element.description}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="price">
+      <th mat-header-cell *matHeaderCellDef i18n="@@pages-plans-price"> Price</th>
+      <td mat-cell *matCellDef="let element"> {{element.price}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="duration">
+      <th mat-header-cell *matHeaderCellDef> Duration</th>
+      <td mat-cell *matCellDef="let element" i18n="@@pages-plans-duration"> {{element.duration}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="status">
+      <th mat-header-cell *matHeaderCellDef i18n="@@pages-plans-status"> Status</th>
+      <td mat-cell *matCellDef="let element">
+        <mat-chip-list>
+          <mat-chip *ngIf="element.enabled" color="primary" selected i18n="@@pages-plans-enabled">
+            Enabled
+          </mat-chip>
+          <mat-chip *ngIf="!element.enabled" i18n="@@pages-plans-disabled">
+            Disabled
+          </mat-chip>
+        </mat-chip-list>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="default">
+      <th mat-header-cell *matHeaderCellDef i18n="@@pages-plans-default"> Default Plan</th>
+      <td mat-cell *matCellDef="let element">
+        <mat-checkbox [(ngModel)]="element.defaultPlan" (ngModelChange)="makePlanDefault(element)"></mat-checkbox>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let element">
+        <button mat-icon-button color="primary" (click)="editPlan(element)">
+          <mat-icon fontIcon="edit"></mat-icon>
+        </button>
+        <button mat-icon-button color="warn" (click)="deletePlan(element)">
+          <mat-icon fontIcon="delete"></mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+  <div *ngIf="showLoader">
+    <loader></loader>
+  </div>
+  <mat-paginator *ngIf="pagination"
+                 [hidePageSize]="true"
+                 [length]="pagination.totalItems"
+                 [pageSize]="pagination.size"
+                 (page)="onPageChange($event)"
+                 aria-label="Select page" i18n="@@pages-plans-select-page">
+  </mat-paginator>
+</div>

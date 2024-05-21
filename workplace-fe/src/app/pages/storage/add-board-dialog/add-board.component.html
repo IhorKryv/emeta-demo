@@ -1,0 +1,21 @@
+<h1 mat-dialog-title>
+  <ng-container *ngIf="!board.id; else editMode" i18n="@@storage-add-board-create">Board Creation</ng-container>
+  <ng-template #editMode><span i18n="@@storage-add-board-edit">Board Editing</span></ng-template>
+</h1>
+<div mat-dialog-content>
+  <form [formGroup]="boardForm" class="board-dialog-content">
+    <mat-form-field appearance="outline">
+      <mat-label i18n="@@storage-add-board-name">Board Name</mat-label>
+      <input matInput formControlName="name" (input)="onValuesChange()" required>
+      <mat-error *ngIf="boardForm.get('name')?.invalid" i18n="@@storage-add-board-nameError">Please set a board name</mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label i18n="@@storage-add-board-description">Board Description</mat-label>
+      <textarea matInput formControlName="description" (input)="onValuesChange()"></textarea>
+    </mat-form-field>
+  </form>
+</div>
+<div mat-dialog-actions>
+  <button mat-stroked-button (click)="onClose()" i18n="@@dialog-cancel">Cancel</button>
+  <button mat-flat-button color="primary" (click)="onSave()" [disabled]="saveDisabled" i18n="@@dialog-save">Save</button>
+</div>

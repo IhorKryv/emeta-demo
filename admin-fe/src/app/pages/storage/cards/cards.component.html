@@ -1,0 +1,60 @@
+<loader-block *ngIf="loaderActive" title="Uploading cards" description="This process may take a while, depending on the number of uploaded cards"></loader-block>
+<div class="deck-content">
+  <div class="deck-left">
+    <div class="deck-info-content">
+      <h2>{{deck.name}}</h2>
+      <div class="deck-info">
+        <p>{{deck.description}}</p>
+        <span i18n="@@pages-cards-available"><mat-icon>{{deck.available ? 'check' : 'close'}}</mat-icon> Available</span>
+        <span i18n="@@pages-cards-premium"><mat-icon>{{deck.premium ? 'check' : 'close'}}</mat-icon> Premium</span>
+      </div>
+    </div>
+    <h2 class="card-back-title" i18n="@@pages-cards-card-back">Card Back</h2>
+    <div class="deck-back-card-container">
+      <ng-container *ngIf="deck.cardBackUrl; else uploadTemplate">
+        <img class="card-back-image" [src]="deck.cardBackUrl"/>
+        <button mat-flat-button color="primary" class="remove-card-back-button" (click)="removeCardBackFromDeck()" i18n="@@pages-cards-remove-card-back">Remove Card Back</button>
+      </ng-container>
+      <ng-template #uploadTemplate>
+        <input type="file" class="file-input"
+               (change)="onFileSelected($event)">
+      </ng-template>
+    </div>
+  </div>
+  <div class="deck-right">
+    <h2 i18n="@@pages-cards-upload">Upload cards</h2>
+    <div class="deck-cards-upload">
+      <div class="file-upload" appDrag (files)="uploadCards($event)">
+        <div class="upload-text">
+          <mat-icon i18n="@@pages-cards-upload-file">upload_file</mat-icon>
+          <span i18n="@@pages-cards-drops">Drop your cards here</span>
+          <p i18n="@@pages-cards-supported-types">Supported types: jpg, jpeg, png</p>
+        </div>
+      </div>
+    </div>
+    <h2 class="cards-title" i18n="@@pages-cards">Cards</h2>
+    <div *ngIf="showLoader">
+      <loader></loader>
+    </div>
+    <div class="deck-cards-list">
+      <div class="card" *ngFor="let card of deckCards">
+        <div class="card-body">
+          <img class="card-image" [src]="card.url"/>
+          <button class="remove-card-button" (click)="removeCard(card.id!, card.extension!)">
+            <mat-icon i18n="@@pages-cards-delete">delete</mat-icon>
+          </button>
+          <button class="swap-card-button" (click)="onCardSwap(card)">
+            <mat-icon i18n="@@pages-cards-swap-horiz">swap_horiz</mat-icon>
+          </button>
+        </div>
+      </div>
+    </div>
+    <mat-paginator *ngIf="pagination"
+                   [hidePageSize]="true"
+                   [length]="pagination.totalItems"
+                   [pageSize]="pagination.size"
+                   (page)="getDeckCards($event)"
+                   aria-label="Select page" i18n="@@pages-cards-select-page">
+    </mat-paginator>
+  </div>
+</div>

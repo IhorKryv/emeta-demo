@@ -1,0 +1,173 @@
+.deck-content {
+  display: flex;
+  margin-top: 25px;
+
+  .deck-left {
+    flex: 1 1 20%;
+    padding: 15px;
+
+    .deck-info {
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      justify-content: flex-start;
+      flex-wrap: nowrap;
+      min-height: 202px;
+
+      p, span {
+        margin-bottom: 15px;
+      }
+
+      p {
+        margin-top: 0;
+        font-size: 18px;
+      }
+
+      span {
+        display: flex;
+        align-items: center;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        justify-content: flex-start;
+
+        mat-icon {
+          color: #5e53f7;
+        }
+      }
+    }
+
+    .card-back-title {
+      margin-bottom: 15px;
+      padding-bottom: 15px;
+      border-bottom: 1px solid #e0e0e0;
+    }
+
+    .deck-back-card-container {
+      margin-top: 25px;
+      padding: 5px;
+      .card-back-image {
+        max-width: 100%;
+        border-radius: 15px;
+        box-shadow: 0 4px 7px 0 #00000096;
+      }
+      .remove-card-back-button {
+        display: block;
+        margin: 15px auto 0;
+        width: 100%;
+      }
+    }
+  }
+
+  .deck-right {
+    flex: 1 1 80%;
+    padding: 15px;
+
+    .cards-title {
+      margin-bottom: 15px;
+      padding-bottom: 15px;
+      border-bottom: 1px solid #e0e0e0;
+    }
+
+    .deck-cards-upload {
+      .file-upload {
+        background: rgb(249 249 249) !important;
+        padding: 25px;
+        min-height: 150px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        border: 1px dashed #7166f973;
+
+        .upload-text {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          flex-wrap: nowrap;
+
+          mat-icon {
+            width: 48px;
+            height: 48px;
+            font-size: 50px;
+            color: #7166f9;
+          }
+
+          span {
+            font-size: 18px;
+            margin-top: 25px;
+            font-weight: 600;
+          }
+
+          p {
+            font-size: 14px;
+            margin: 5px 0 0;
+            color: #7a7a7a;
+          }
+        }
+      }
+    }
+
+    .deck-cards-list {
+      margin-top: 25px;
+      display: flex;
+      width: 100%;
+      flex-wrap: wrap;
+
+      .card {
+        flex: 1 1 25%;
+        width: 75px;
+        max-width: 25%;
+        position: relative;
+
+        .card-body {
+          padding: 5px;
+          position: relative;
+
+          .card-image {
+            max-width: 100%;
+            border-radius: 15px;
+            box-shadow: 0 4px 7px 0 #00000096;
+          }
+
+          .remove-card-button {
+            transition: 0.3s;
+            position: absolute;
+            top: 7px;
+            right: 7px;
+            z-index: 10;
+            background: #cf3434;
+            color: white;
+            border: 0;
+            border-radius: 5px 12px 5px 5px;
+            display: block;
+          }
+
+          .remove-card-button:hover {
+            transition: 0.3s;
+            cursor: pointer;
+            background: rgb(238, 19, 19);
+          }
+
+          .swap-card-button {
+            transition: 0.3s;
+            position: absolute;
+            top: 7px;
+            left: 7px;
+            z-index: 10;
+            background: #f39649;
+            color: white;
+            border: 0;
+            border-radius: 12px 5px 5px 5px;
+            display: block;
+          }
+
+          .swap-card-button:hover {
+            transition: 0.3s;
+            cursor: pointer;
+            background: #de904f;
+          }
+        }
+      }
+    }
+  }
+}

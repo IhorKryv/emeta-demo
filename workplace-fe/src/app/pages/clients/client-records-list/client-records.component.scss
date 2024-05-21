@@ -1,0 +1,245 @@
+@use "../../../../common/palett";
+
+.client-records-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 15px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #e3e3e3;
+  flex-wrap: wrap;
+
+  h1 {
+    padding: 0;
+    margin: 0;
+  }
+
+  button {
+    cursor: pointer;
+    padding: 10px 25px;
+    font-size: 16px;
+    background: palett.$primary-color;
+    border: none;
+    border-radius: 5px;
+    color: white;
+  }
+}
+
+.client-records-row {
+  display: flex;
+  align-items: stretch;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+
+  .client-record-box {
+    width: 100%;
+    display: flex;
+
+    .client-record-card {
+      width: 100%;
+      margin-bottom: 25px;
+      box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.3215686275);
+      border-radius: 15px;
+      padding: 15px;
+
+      .client-record-card-header {
+        padding: 5px;
+        border-bottom: 1px solid #e3e3e3;
+        margin-bottom: 10px;
+
+        .client-record-card-header-top {
+          display: flex;
+          align-items: flex-start;
+          justify-content: space-between;
+
+          p {
+            color: #424242;
+            margin: 0;
+            padding: 0;
+
+            span {
+              font-weight: bold;
+            }
+          }
+
+          .client-record-dates {
+            width: calc(100% - 80px);
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+          }
+
+          .client-record-actions {
+            width: 80px;
+            .edit-record {
+              cursor: pointer;
+              width: 35px;
+              height: 35px;
+              margin-right: 10px;
+              color: white;
+              background: #f89b06;
+              border-radius: 5px;
+              border: none;
+            }
+
+            .delete-record {
+              cursor: pointer;
+              width: 35px;
+              height: 35px;
+              color: white;
+              background: #ef1313;
+              border-radius: 5px;
+              border: none;
+            }
+          }
+        }
+        h2 {
+          padding: 5px 0;
+          margin: 0;
+          font-size: 20px;
+          color: palett.$primary-color;
+          font-weight: 500;
+        }
+      }
+      .client-record-card-content {
+        width: 100%;
+        display: flex;
+
+        p {
+          width: 100%;
+          margin: 0 0 15px;
+          padding: 5px 5px 15px;
+          border-bottom: 1px solid #e3e3e3;
+        }
+      }
+
+      .client-record-card-attachments-header {
+        font-size: 16px;
+        padding: 0 5px;
+        margin: 0 0 15px;
+      }
+
+      .client-record-card-attachments {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        padding-bottom: 15px;
+        flex-wrap: wrap;
+
+        .client-record-attachment {
+          width: 20%;
+          display: flex;
+          margin-bottom: 15px;
+
+          .client-record-attachment-body {
+            width: 100%;
+            text-align: center;
+            position: relative;
+
+            .delete-file {
+              position: absolute;
+              bottom: 5px;
+              right: 10px;
+              border: none;
+              color: white;
+              background: #ef1313;
+              border-radius: 5px;
+            }
+
+            .delete-file:hover {
+              cursor: pointer;
+            }
+
+            a {
+              text-decoration: none;
+              border: 1px solid #e3e3e3;
+              border-radius: 5px;
+              max-width: 90%;
+              margin: 0 auto;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              flex-direction: column;
+              padding: 10px;
+              height: 75px;
+
+              span {
+                color: #424242;
+                font-size: 14px;
+                margin-bottom: 5px;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .add-client-record {
+    width: 25%;
+    display: flex;
+
+    .add-client-record-body {
+      padding: 15px;
+      width: 100%;
+
+      button {
+        transition: 0.3s;
+        width: 100%;
+        height: 100%;
+        display: block;
+        background: white;
+        border: 1px dashed palett.$primary-color;
+        font-size: 20px;
+        color: palett.$primary-color;
+
+        span {
+          color: white;
+          background: palett.$primary-color;
+          border-radius: 50%;
+          padding: 0 5px;
+        }
+      }
+      button:hover {
+        transition: 0.3s;
+        cursor: pointer;
+        border-style: solid;
+        background: palett.$primary-color;
+        color: white;
+      }
+    }
+  }
+}
+
+.file-upload {
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .upload-text {
+    display: flex;
+    align-items: center;
+  }
+}
+
+@media (max-width:800px) {
+  .client-records-header {
+    h1 {
+      font-size: 22px;
+      margin-bottom: 15px;
+    }
+    button {
+      width: 100%;
+    }
+  }
+  .client-record-attachment {
+    width: 100% !important;
+  }
+
+  .client-record-attachment-body {
+    a {
+      max-width: 98% !important;
+    }
+  }
+}

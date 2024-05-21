@@ -1,0 +1,68 @@
+<div class="client-records-header">
+  <h1 i18n="@@client-records-header-title">List of records for client: {{client?.lastName!}} {{client?.firstName!}}
+    [{{client?.email!}}]</h1>
+  <button i18n="@@client-records-add" (click)="addRecord(null)"><span>+</span> Add Record</button>
+</div>
+<div class="client-records-content">
+  <div class="client-records-list">
+    <div class="client-records-row">
+      <div *ngFor="let record of records" class="client-record-box">
+        <div class="client-record-card">
+          <div class="client-record-card-header">
+            <div class="client-record-card-header-top">
+              <div class="client-record-dates">
+                <p i18n="@@client-record-creation-date">Created At:
+                  <span>{{record.createdDate | date: 'medium' }}</span></p>
+                <p *ngIf="record.sessionDate" i18n="@@client-record-session-date">Session Date:
+                  <span>{{record.sessionDate | date: 'medium' }}</span></p>
+              </div>
+              <div class="client-record-actions">
+                <button class="edit-record" (click)="addRecord(record)">
+                  <mat-icon fontIcon="edit"></mat-icon>
+                </button>
+                <button class="delete-record" (click)="onDeleteClientRecord(record)">
+                  <mat-icon fontIcon="delete"></mat-icon>
+                </button>
+              </div>
+            </div>
+            <h2>{{record.title}}</h2>
+          </div>
+          <div class="client-record-card-content">
+            <p>{{record.content}}</p>
+          </div>
+          <h2 class="client-record-card-attachments-header">Attached files</h2>
+          <div class="client-record-card-attachments">
+            <div *ngFor="let file of record.files" class="client-record-attachment">
+              <div class="client-record-attachment-body">
+                <button class="delete-file" (click)="onDeleteClientFile(file)">
+                  <mat-icon fontIcon="delete"></mat-icon>
+                </button>
+                <a href="{{file.url}}" target="_blank">
+                  <span>{{file.name}}</span>
+                  <i class="material-icons">file_download</i>
+                </a>
+              </div>
+            </div>
+          </div>
+          <div *ngIf="!isMobile; else mobileFileUpload" class="file-upload" appDrag
+               (files)="uploadFiles(record, $event)">
+            <div class="upload-text">
+              <mat-icon>upload_file</mat-icon>
+              <span i18n="@@client-records-file-upload-text">Drop your attachments here</span>
+            </div>
+          </div>
+          <ng-template #mobileFileUpload>
+            <div class="mobile-upload">
+              <label for="upload" class="uploadButton">
+                <mat-icon>upload_file</mat-icon>
+                <span i18n="@@client-records-file-mobile-upload">Select one or more files to upload</span>
+              </label>
+              <input type="file" name="upload" id="upload" multiple hidden
+                     (change)="uploadFilesMobile(record, $event)"/>
+            </div>
+          </ng-template>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,36 @@
+<h1 mat-dialog-title>
+  <ng-container *ngIf="!preference.id; else editMode" i18n="@@pages-add-preference-creation">Preference Creation</ng-container>
+  <ng-template #editMode>
+    <span i18n="@@pages-add-preference-editing">
+      Preference Editing
+    </span>
+  </ng-template>
+</h1>
+<div mat-dialog-content>
+  <form [formGroup]="preferenceForm">
+    <p>
+      <mat-form-field appearance="outline">
+        <mat-label i18n="@@pages-add-preference-name">Preference name</mat-label>
+        <input matInput formControlName="name" required>
+        <mat-error *ngIf="preferenceForm.get('name')?.invalid" i18n="@@pages-add-preference-error-name">Please set a preference name</mat-error>
+      </mat-form-field>
+    </p>
+    <p>
+      <mat-form-field appearance="outline">
+        <mat-label i18n="@@pages-add-preference-key">Preference key</mat-label>
+        <input matInput formControlName="key" required (input)="transformKey()">
+        <mat-error *ngIf="preferenceForm.get('key')?.invalid" i18n="@@pages-add-preference-error-key">Please set a preference key</mat-error>
+      </mat-form-field>
+    </p>
+    <p>
+      <mat-form-field appearance="outline">
+        <mat-label i18n="@@pages-add-preference-description">Preference description</mat-label>
+        <textarea matInput formControlName="description" cdkTextareaAutosize cdkAutosizeMinRows="3"></textarea>
+      </mat-form-field>
+    </p>
+  </form>
+</div>
+<div mat-dialog-actions class="action-buttons">
+  <button mat-stroked-button (click)="onClose()" i18n="@@pages-add-preference-cancel">Cancel</button>
+  <button mat-flat-button color="primary" (click)="onSave()" i18n="@@pages-add-preference-save">Save</button>
+</div>

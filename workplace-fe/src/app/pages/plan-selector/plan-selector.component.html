@@ -1,0 +1,20 @@
+<div class="plan-selector">
+  <h1>Looks like your current plan is expired or you haven't any</h1>
+  <p>To continue using our platform, please renew your current payment, or buy a new one</p>
+  <div class="available-plans">
+    <div *ngFor="let plan of plans" class="plan-card">
+      <h2>{{plan.name}}</h2>
+      <div class="plan-card-header">
+        <h1>{{plan.price}} <span>UAH</span></h1>
+        <span>per {{getDuration(plan!.duration!.toString())}}</span>
+      </div>
+      <div class="plan-settings">
+        <span><mat-icon>check</mat-icon> {{plan.macSettings.numberOfFreeDecks}} free deck slots</span>
+        <span><mat-icon>check</mat-icon> {{plan.macSettings.numberOfFreeBoards}} free board slots</span>
+        <span><mat-icon>{{plan.macSettings.allowOwnCards ? 'check' : 'close'}}</mat-icon> Own decks, cards and boards allowed</span>
+        <span><mat-icon>{{plan.macSettings.personalPage ? 'check' : 'close'}}</mat-icon> Personal Page available</span>
+      </div>
+      <button mat-flat-button color="primary" (click)="onPlanSelect(plan)">Select</button>
+    </div>
+  </div>
+</div>

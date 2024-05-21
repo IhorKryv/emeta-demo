@@ -1,0 +1,32 @@
+<section class="login-page">
+  <div class="login-container">
+    <div class="login-content">
+      <div class="logo">
+        <img alt="emetaplus-logo" class="login-logo" src="assets/logo.png"/>
+      </div>
+      <h1 i18n="@@template-auth-login-now">Login now</h1>
+      <div>
+        <form (ngSubmit)="submitForm()" [formGroup]="authForm" class="content" novalidate>
+          <mat-form-field>
+            <mat-icon matPrefix>person_outline</mat-icon>
+            <input formControlName="userName" matInput placeholder="Username" type="text">
+            <mat-error *ngIf="authForm.get('userName')?.invalid" i18n="@@template-auth-error-email">Please, enter your email</mat-error>
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-icon matPrefix>lock_outline</mat-icon>
+            <input autocomplete="false" formControlName="password" matInput placeholder="Password" type="password">
+            <mat-error *ngIf="authForm.get('password')?.invalid" i18n="@@template-auth-error-password">Please, enter your password</mat-error>
+          </mat-form-field>
+          <div class="form-group">
+            <span *ngIf="badLogin == true" class="text-danger">
+               <mat-error i18n="@@template-auth-error-email-or-password">The email address or password is incorrect.</mat-error>
+            </span>
+            <button color="primary" mat-raised-button type="submit" i18n="@@template-auth-login">LOGIN</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+

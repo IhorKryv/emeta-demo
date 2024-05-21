@@ -1,0 +1,3 @@
+[submodule "src/common"]
+	path = src/common
+	url = https://dev.azure.com/Wellnetinc/eMetaPlus/_git/common-components

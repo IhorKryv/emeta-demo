@@ -1,0 +1,30 @@
+<div>
+  <div *ngIf="showLoader">
+    <loader></loader>
+  </div>
+  <div class="admin-decks">
+    <div class="admin-deck-container" *ngFor="let deck of decks">
+      <div class="admin-deck-card">
+        <div class="admin-deck-content">
+          <img [src]="getCardBackImage(deck)" alt="deck-cardback"/>
+          <div class="admin-deck-info">
+            <h2>{{deck.customName && deck.customName.trim() !== '' ? deck.customName : deck.name}}</h2>
+            <p>{{deck.customDescription && deck.customDescription.trim() !== '' ? deck.customDescription : deck.description}}</p>
+            <div class="admin-deck-footer">
+              <span><mat-icon fontIcon="collections"></mat-icon>
+                {{deck.cardsCount}}</span>
+              <div class="actions">
+                <button class="show-admin-deck" mat-flat-button color="primary" (click)="openDeck(deck)" i18n="@@admin-selected-decks-open">
+                  Open deck
+                </button>
+              </div>
+            </div>
+          </div>
+          <button class="edit-admin-deck" mat-icon-button (click)="editDeck(deck)">
+            <mat-icon fontIcon="edit"></mat-icon>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,31 @@
+.schedule {
+  display: flex;
+  gap: 40px;
+
+  .schedule-text {
+    width: calc(50% - 20px);
+    display: flex;
+    flex-direction: column;
+  }
+
+  .schedule-items {
+    width: calc(50% - 20px);
+    display: flex;
+    flex-direction: column;
+
+    .schedule-item {
+      display: flex;
+      align-items: baseline;
+      gap: 15px;
+
+      span {
+        width: 125px;
+        font-weight: 600;
+      }
+
+      .schedule-item-input {
+        width: calc(100% - 140px);
+      }
+    }
+  }
+}

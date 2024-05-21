@@ -1,0 +1,8 @@
+<div class="profile-general">
+  <mat-form-field class="profile-general-input">
+    <mat-label i18n="@@profile-profile-general-url">Profile Page URL</mat-label>
+    <input matInput [(ngModel)]="profile!.url!" placeholder="Profile Page URL"
+           (ngModelChange)="onUrlChange()">
+  </mat-form-field>
+  <span>.emetaplus.com</span>
+</div>

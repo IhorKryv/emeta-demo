@@ -1,0 +1,21 @@
+<div class="schedule">
+  <div class="schedule-text">
+    <mat-form-field class="schedule-input">
+      <mat-label i18n="@@profile-schedule-title">Title</mat-label>
+      <input matInput [(ngModel)]="schedule!.title!" placeholder="Schedule Title" (ngModelChange)="onTitleChange()">
+    </mat-form-field>
+    <mat-form-field class="schedule-input">
+      <mat-label i18n="@@profile-schedule-shortText">Short Text</mat-label>
+      <textarea matInput [(ngModel)]="schedule!.shortText!" placeholder="Schedule Short Text" [rows]="7" maxlength="255" (ngModelChange)="onShortTextChange()"></textarea>
+    </mat-form-field>
+  </div>
+  <div *ngIf="schedule!.items" class="schedule-items">
+    <div *ngFor="let key of Object.keys(schedule.items)" class="schedule-item">
+      <span>{{getScheduleDay(key)}}:</span>
+      <mat-form-field class="schedule-item-input">
+        <mat-label i18n="@@profile-schedule-item">Open hours</mat-label>
+        <input matInput [(ngModel)]="schedule.items[key]" placeholder="00:00 - 00:00" (ngModelChange)="onItemChange(key, schedule.items[key])"/>
+      </mat-form-field>
+    </div>
+  </div>
+</div>

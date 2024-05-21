@@ -1,0 +1,108 @@
+<div *ngIf="!isMobile" class="deck-content">
+  <div class="deck-left">
+    <div class="deck-info-content">
+      <h2>{{deck.name}}</h2>
+      <div class="deck-info">
+        <p>{{deck.description}}</p>
+        <span i18n="@@storage-cards-available"><mat-icon>{{deck.available ? 'check' : 'close'}}</mat-icon> Available</span>
+      </div>
+    </div>
+    <h2 class="card-back-title" i18n="@@storage-cards-cardBack">Card Back</h2>
+    <div class="deck-back-card-container">
+      <ng-container *ngIf="deck.cardBackUrl; else uploadTemplate">
+        <img class="card-back-image" [src]="deck.cardBackUrl"/>
+        <button mat-flat-button color="primary" class="remove-card-back-button" (click)="removeCardBackFromDeck()"
+                i18n="@@storage-cards-removeCardBack">Remove Card Back
+        </button>
+      </ng-container>
+      <ng-template #uploadTemplate>
+        <input type="file" class="file-input"
+               (change)="onFileSelected($event)">
+      </ng-template>
+    </div>
+  </div>
+  <div class="deck-right">
+    <h2 i18n="@@storage-cards-upload-title">Upload cards</h2>
+    <div class="deck-cards-upload">
+      <div class="file-upload" appDrag (files)="uploadCards($event)">
+        <div class="upload-text">
+          <mat-icon>upload_file</mat-icon>
+          <span i18n="@@storage-cards-upload">Drop your cards here</span>
+          <p i18n="@@storage-cards-types">Supported types: jpg, jpeg, png</p>
+        </div>
+      </div>
+    </div>
+    <h2 class="cards-title">Cards</h2>
+    <div class="deck-cards-list">
+      <div class="card" *ngFor="let card of deckCards">
+        <div class="card-body">
+          <img class="card-image" src="{{card.url}}"/>
+          <button class="remove-card-button" (click)="removeCard(card.id!)">
+            <mat-icon>delete</mat-icon>
+          </button>
+          <button class="swap-card-button" (click)="onCardSwap(card)">
+            <mat-icon>swap_horiz</mat-icon>
+          </button>
+        </div>
+      </div>
+    </div>
+    <mat-paginator *ngIf="pagination"
+                   [hidePageSize]="true"
+                   [length]="pagination.totalItems"
+                   [pageSize]="pagination.size"
+                   (page)="getDeckCards($event)"
+                   aria-label="Select page">
+    </mat-paginator>
+  </div>
+</div>
+
+<div *ngIf="isMobile" class="mobile-deck-content">
+  <div class="mobile-deck-content-header">
+    <h1>{{deck.name}}</h1>
+    <p>{{deck.description}}</p>
+    <span i18n="@@storage-cards-available"><mat-icon>{{deck.available ? 'check' : 'close'}}</mat-icon> Available</span>
+    <div class="mobile-deck-cardback">
+      <h2 i18n="@@storage-cards-mobile-cardBack">Card Back</h2>
+      <ng-container *ngIf="deck.cardBackUrl; else uploadTemplate">
+        <img class="card-back-image" [src]="deck.cardBackUrl"/>
+        <button mat-flat-button color="primary" class="remove-card-back-button" (click)="removeCardBackFromDeck()"
+                i18n="@@storage-cards-removeCardBack">Remove Card Back
+        </button>
+      </ng-container>
+      <ng-template #uploadTemplate>
+        <input type="file" class="file-input"
+               (change)="onFileSelected($event)">
+      </ng-template>
+    </div>
+  </div>
+  <div class="mobile-deck-content-upload">
+    <h2 i18n="@@storage-cards-mobile-upload-title">Upload cards</h2>
+    <label for="upload" class="uploadButton">
+      <mat-icon>upload_file</mat-icon>
+      <span i18n="@@storage-cards-mobile-upload">Select one or more cards to upload</span>
+      <p i18n="@@storage-cards-mobile-types">Supported types: jpg, jpeg, png</p>
+    </label>
+    <input type="file" name="upload" id="upload" multiple hidden (change)="uploadCardsMobile($event)"/>
+  </div>
+  <div class="mobile-deck-content-cards">
+    <div class="mobile-cards-header">
+      <h2 i18n="@@storage-cards-mobile-cards">Cards List</h2>
+    </div>
+    <div class="mobile-card-box" *ngFor="let card of deckCards">
+      <img [src]="card.url" alt="card"/>
+      <button class="remove-card-mobile-button" (click)="removeCard(card.id!)">
+        <mat-icon>delete</mat-icon>
+      </button>
+      <button class="swap-card-mobile-button" (click)="onCardSwap(card)">
+        <mat-icon>swap_horiz</mat-icon>
+      </button>
+    </div>
+    <mat-paginator *ngIf="pagination"
+                   [hidePageSize]="true"
+                   [length]="pagination.totalItems"
+                   [pageSize]="pagination.size"
+                   (page)="getDeckCards($event)"
+                   aria-label="Select page">
+    </mat-paginator>
+  </div>
+</div>

@@ -1,0 +1,29 @@
+<mat-sidenav-container class="page">
+  <mat-sidenav #sidenav [mode]="isMobile ? 'over' : 'side'" [opened]="!isMobile">
+    <div side-bar [items]="items" [ngClass]="'sidebar'" [onLogout]="logout"></div>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <div class="header" *ngIf="isMobile">
+      <mat-toolbar color="primary">
+        <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon"
+                (click)="sidenav.toggle()">
+          <mat-icon>menu</mat-icon>
+        </button>
+        <span i18n="@@nav-title">EMeta Plus</span>
+      </mat-toolbar>
+    </div>
+    <div *ngIf="myPlan!.plan!.defaultPlan" class="temporary-plan" (click)="openPlans()">
+      <h1 i18n="@@temporary-plan-title">Temporary Access</h1>
+      <p i18n="@@temporary-duration">Your access to system will expire in <span>{{calculateNumberOfDays(myPlan.expiringAt)}}</span> days</p>
+      <span>Click to select the new payment plan</span>
+    </div>
+    <div class="container">
+      <div class="main">
+        <page-header [pageTitle]="pageTitle" [userInfo]="userInfo"></page-header>
+        <div class="content">
+          <router-outlet (activate)="fillTemplate($event)"></router-outlet>
+        </div>
+      </div>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

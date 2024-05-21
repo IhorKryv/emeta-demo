@@ -1,0 +1,98 @@
+@use "../../../../common/palett";
+
+.admin-boards {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  flex-wrap: wrap;
+
+  .admin-board-container {
+    flex-basis: 33.33%;
+
+    .admin-board-card {
+      position: relative;
+      padding: 15px;
+
+      .admin-board-content {
+        img {
+          width: 100%;
+          border-radius: 15px;
+          box-shadow: 0px 0px 4px 1px rgb(0 0 0 / 42%);
+          max-height: 350px;
+          object-fit: cover;
+          object-position: top;
+        }
+
+        .admin-board-info {
+          transition: 0.3s;
+          position: absolute;
+          bottom: 5px;
+          background: rgb(42 42 42 / 85%);
+          right: 0px;
+          padding: 15px;
+          left: 0;
+          color: white;
+          border-bottom-left-radius: 15px;
+          border-bottom-right-radius: 15px;
+          margin: 15px;
+
+          h2 {
+            font-size: 16px;
+            margin: 0 0 10px;
+            padding: 0 0 0px;
+            border-bottom: 1px solid;
+          }
+
+          p {
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            font-size: 15px;
+          }
+
+          span {
+            display: flex;
+            align-items: center;
+            color: palett.$additional-color;
+
+            mat-icon {
+              margin-right: 5px;
+            }
+          }
+
+          .admin-board-footer {
+            display: flex;
+            flex-direction: row-reverse;
+            align-items: center;
+            justify-content: space-between;
+
+            .actions {
+              .edit-admin-board {
+                color: #f89b06;
+              }
+              .show-admin-board {
+                color: #2ce32c;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+@media (max-width: 1450px) {
+  .admin-board-container {
+    flex-basis: 50% !important;
+  }
+}
+
+@media (max-width: 1000px) {
+  .admin-board-container {
+    flex-basis: 100% !important;
+  }
+}
+
+.mobile-board {
+  min-height: 250px;
+}

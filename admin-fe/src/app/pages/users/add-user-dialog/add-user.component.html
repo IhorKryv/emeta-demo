@@ -1,0 +1,44 @@
+<h1 mat-dialog-title>
+  <ng-container *ngIf="!user.id; else editMode" i18n="@@pages-user-creation">User Creation</ng-container>
+  <ng-template #editMode>
+    <span i18n="@@pages-user-editing">
+      User Editing
+    </span>
+  </ng-template>
+</h1>
+<div mat-dialog-content>
+  <form [formGroup]="userForm" class="user-dialog-content">
+    <mat-form-field appearance="outline">
+      <mat-label i18n="@@pages-user-email">Username (Email)</mat-label>
+      <input matInput formControlName="username" required>
+      <mat-error *ngIf="userForm.get('username')?.invalid" i18n="@@pages-user-error-email">Please set a valid user's email</mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label i18n="@@pages-user-first-name">First Name</mat-label>
+      <input matInput formControlName="firstName" (input)="onValuesChange()" required>
+      <mat-error *ngIf="userForm.get('firstName')?.invalid" i18n="@@pages-user-error-first-name">Please set a user's first name</mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label i18n="@@pages-user-last-name">Last Name</mat-label>
+      <input matInput formControlName="lastName" (input)="onValuesChange()" required>
+      <mat-error *ngIf="userForm.get('lastName')?.invalid" i18n="@@pages-user-error-last-name">Please set a user's last name</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label i18n="@@pages-user-roles">Roles</mat-label>
+      <mat-select formControlName="roles" (selectionChange)="onValuesChange()" multiple required>
+        <mat-select-trigger>
+          {{userForm.get('roles')?.value![0] || ''}}
+          <span *ngIf="(userForm.get('roles')?.value?.length || 0) > 1" class="example-additional-selection">
+        (+{{(userForm.get('roles')?.value?.length || 0) - 1}} {{userForm.get('roles')?.value?.length === 2 ? 'other' : 'others'}})
+      </span>
+        </mat-select-trigger>
+        <mat-option *ngFor="let role of roleNames" [value]="role">{{role}}</mat-option>
+      </mat-select>
+      <mat-error *ngIf="userForm.get('roles')?.invalid" i18n="@@pages-user-error-roles">Please select at least one role</mat-error>
+    </mat-form-field>
+  </form>
+</div>
+<div mat-dialog-actions class="action-buttons">
+  <button mat-stroked-button (click)="onClose()" i18n="@@pages-user-cancel">Cancel</button>
+  <button mat-flat-button color="primary" (click)="onSave()" [disabled]="saveDisabled" i18n="@@pages-user-save">Save</button>
+</div>

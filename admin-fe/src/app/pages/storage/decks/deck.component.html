@@ -1,0 +1,80 @@
+<div class="content-header">
+  <div class="content-title">
+    <search-field (onUpdate)="doSearch($event)"></search-field>
+  </div>
+  <div class="user-info">
+    <button mat-raised-button color="primary" (click)="addNewDeck()" i18n="@@pages-deck-view-add-new">Add New</button>
+  </div>
+</div>
+<div>
+  <table mat-table [dataSource]="dataSource" aria-describedby="">
+    <ng-container matColumnDef="index">
+      <th mat-header-cell *matHeaderCellDef> No.</th>
+      <td mat-cell *matCellDef="let deck; let i = index"> {{i + 1}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef i18n="@@pages-deck-view-name"> Name</th>
+      <td mat-cell *matCellDef="let deck"> {{deck.name}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="description">
+      <th mat-header-cell *matHeaderCellDef i18n="@@pages-deck-view-description"> Description</th>
+      <td mat-cell *matCellDef="let deck"> {{deck.description}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="categories">
+      <th mat-header-cell *matHeaderCellDef i18n="@@pages-deck-view-categories"> Categories</th>
+      <td mat-cell *matCellDef="let deck"> {{deck.categories | categoriesListPipe}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="cardsCount">
+      <th mat-header-cell *matHeaderCellDef i18n="@@pages-deck-view-cards-in-deck"> Cards in deck</th>
+      <td mat-cell *matCellDef="let deck"> {{deck.cardsCount}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="available">
+      <th mat-header-cell *matHeaderCellDef i18n="@@pages-deck-view-available"> Deck is available</th>
+      <td mat-cell *matCellDef="let deck">  <mat-checkbox [(ngModel)]="deck.available" (ngModelChange)="onAvailabilityChange(deck)"></mat-checkbox></td>
+    </ng-container>
+
+    <ng-container matColumnDef="premium">
+      <th mat-header-cell *matHeaderCellDef i18n="@@pages-deck-view-premium"> Premium deck</th>
+      <td mat-cell *matCellDef="let deck">  <mat-checkbox  [(ngModel)]="deck.premium" (ngModelChange)="onPremiumStatusChange(deck)"></mat-checkbox></td>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let deck">
+        <button mat-icon-button color="primary" [routerLink]="[deck.id, 'cards']">
+          <mat-icon fontIcon="filter"></mat-icon>
+        </button>
+        <button mat-icon-button color="primary" (click)="editDeck(deck)">
+          <mat-icon fontIcon="edit"></mat-icon>
+        </button>
+        <button mat-icon-button color="warn" (click)="onDeckDelete(deck)">
+          <mat-icon fontIcon="delete"></mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+    <tr class="mat-row" *matNoDataRow>
+      <td class="mat-cell" [attr.colspan]="displayedColumns.length" i18n="@@pages-deck-view-no-data">
+        No data has been found by search criteria.
+      </td>
+    </tr>
+  </table>
+  <div *ngIf="showLoader">
+    <loader></loader>
+  </div>
+  <mat-paginator *ngIf="pagination"
+                 [hidePageSize]="true"
+                 [length]="pagination.totalItems"
+                 [pageSize]="pagination.size"
+                 (page)="onPageChange($event)"
+                 aria-label="Select page" i18n="@@pages-deck-view-select-page">
+  </mat-paginator>
+</div>

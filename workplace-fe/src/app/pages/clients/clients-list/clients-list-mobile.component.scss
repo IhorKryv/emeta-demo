@@ -1,0 +1,68 @@
+@use 'src/common/palett';
+
+.add-button-mobile {
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+  z-index: 1;
+}
+
+.client-card-box {
+  margin-bottom: 25px;
+
+  .client-card-body {
+    box-shadow: 0px 0px 3px 1px #00000047;
+    border-radius: 5px;
+
+    .client-card-header {
+      padding: 5px 15px 5px 15px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      h1 {
+        font-size: 22px;
+        margin: 0;
+        padding: 0;
+      }
+    }
+
+    .client-card-content {
+      padding: 5px 15px 5px 15px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+
+      span {
+        display: flex;
+        align-items: center;
+        flex-direction: row;
+        margin-bottom: 5px;
+        color: #212121;
+
+        mat-icon {
+          margin-right: 5px;
+        }
+      }
+    }
+
+    .client-card-actions {
+      background: palett.$primary-color;
+      border-bottom-right-radius: 5px;
+      border-bottom-left-radius: 5px;
+      display: flex;
+      justify-content: center;
+      padding: 5px;
+
+      button {
+        border: 1px solid #9c94fb;
+        border-radius: 5px;
+        margin-right: 5px;
+      }
+    }
+  }
+}
+
+mat-paginator {
+  float: left;
+}
